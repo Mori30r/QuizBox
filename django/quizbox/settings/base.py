@@ -13,7 +13,6 @@ SECRET_KEY = "django-insecure-2j(y8#plm+$$13pmv6#domj=mgf2e2cwhi56x2uebq@d%v%_ez
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -25,9 +24,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "quizbox.apps.quiztions"
-    "quizbox.apps.authentication "
-    
+    "quiz",
+    "authentication",
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -61,15 +60,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "quizbox.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 # Password validation
