@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     "quiz",
     "authentication",
     'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +61,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "quizbox.wsgi.application"
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+SIMPLE_JWT = {
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'UPDATE_LAST_LOGIN': False,
+}
 
 
 
