@@ -1,5 +1,7 @@
+import AppLayout from "./Layout/AppLayout";
+
 function App() {
-    return <>s</>;
+    return <AppLayout />;
 }
 
 export default App;

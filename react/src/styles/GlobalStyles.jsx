@@ -15,24 +15,24 @@ const GlobalStyles = styled.createGlobalStyle`
         --color-grey-800: #040505;
         --color-grey-800: #040505;
 
-        --color-purple-0: #E5DBFF;
-        --color-purple-100: #B197FC
-        --color-purple-200: #845EF7
-        --color-purple-300: #7048E8
-        --color-purple-400: #5F3DC4
-        --color-purple-500: #1B1138
+        --color-purple-0: #e5dbff;
+        --color-purple-100: #b197fc;
+        --color-purple-200: #845ef7;
+        --color-purple-300: #7048e8;
+        --color-purple-400: #5f3dc4;
+        --color-purple-500: #1b1138;
 
-        --color-green-0: #C3FAE8;
-        --color-green-200: #20C997;
-        --color-green-400: #087F5B;
-        
-        --color-red-0: #FFE3E3;
-        --color-red-200: #FF7D7D;
-        --color-red-400: #FA5252;
-        
-        --color-orange-0: #FFE8CC;
-        --color-orange-200: #FFA94D;
-        --color-orange-400: #E67700;
+        --color-green-0: #c3fae8;
+        --color-green-200: #20c997;
+        --color-green-400: #087f5b;
+
+        --color-red-0: #ffe3e3;
+        --color-red-200: #ff7d7d;
+        --color-red-400: #fa5252;
+
+        --color-orange-0: #ffe8cc;
+        --color-orange-200: #ffa94d;
+        --color-orange-400: #e67700;
 
         --border-radius-tiny: 3px;
         --border-radius-sm: 5px;
@@ -63,6 +63,7 @@ const GlobalStyles = styled.createGlobalStyle`
         font-family: Vazirmatn;
         font-feature-settings: "ss01";
         line-height: 1.6;
+        text-align: right;
     }
 
     input,
