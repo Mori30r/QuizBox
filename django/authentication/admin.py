@@ -1,6 +1,4 @@
 from django.contrib import admin
-from .models import Teacher, Student, Confirmation
+from .models import  UserBaseQuizBox
 
-admin.site.register(Teacher)
-admin.site.register(Student)
-admin.site.register(Confirmation)
+admin.site.register(UserBaseQuizBox)
