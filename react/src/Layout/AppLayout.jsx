@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Stats from "./Stats";
+import Stats from "./Stats/Stats";
 import Main from "./Main";
 import SideBar from "./SideBar/SideBar";
 
