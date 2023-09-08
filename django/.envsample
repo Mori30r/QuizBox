@@ -1,0 +1,4 @@
+EMAIL_USER = ''
+EMAIL_PASS = ''
+EMAIL_FROM = ''
+SECRET_KEY = "django-insecure-2j(y8#plm+$$13pmv6#domj=mgf2e2cwhi56x2uebq@d%v%_ez"
