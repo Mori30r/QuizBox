@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "authentication",
     'rest_framework',
     "corsheaders",
+    'account',
     'rest_framework_simplejwt',
     'rest_framework.authtoken'
     
