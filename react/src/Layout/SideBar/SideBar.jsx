@@ -11,6 +11,8 @@ import Row from "../../ui/Row";
 const StyledSideBar = styled(Row)`
     width: ${(props) => (props.$isOpen ? "30rem" : "10rem")};
     background-color: var(--color-purple-0);
+    transition: all 0.2s;
+    overflow: hidden;
 `;
 
 function SideBar() {

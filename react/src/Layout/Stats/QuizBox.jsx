@@ -84,6 +84,23 @@ const StyledQuizBox = styled(Row)`
     margin-bottom: 3rem;
 `;
 
+const OnlineQuizText = styled.p`
+    font-weight: 1000;
+    animation: onlineText 1s infinite ease;
+
+    @keyframes onlineText {
+        0% {
+            color: var(--color-green-200);
+        }
+        50% {
+            color: var(--color-purple-400);
+        }
+        100% {
+            color: var(--color-green-200);
+        }
+    }
+`;
+
 function QuizBox({ quiz }) {
     return (
         <StyledQuizBox>
@@ -102,14 +119,7 @@ function QuizBox({ quiz }) {
                     <p>{quiz.end}</p>
                 </QuizTime>
             ) : (
-                <p
-                    style={{
-                        color: "var(--color-purple-200)",
-                        fontWeight: 500,
-                    }}
-                >
-                    در حال برگزاری
-                </p>
+                <OnlineQuizText>در حال برگزاری</OnlineQuizText>
             )}
         </StyledQuizBox>
     );

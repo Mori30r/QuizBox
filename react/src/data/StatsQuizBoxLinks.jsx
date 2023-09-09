@@ -20,4 +20,11 @@ export const list = [
         end: "19:30",
         active: false,
     },
+    {
+        name: "نام درس 4",
+        teacher: "نام استاد 4",
+        start: "13:30",
+        end: "19:30",
+        active: false,
+    },
 ];

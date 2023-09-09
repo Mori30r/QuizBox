@@ -3,6 +3,8 @@ import Row from "../../ui/Row";
 import StatsBox from "./StatsBox";
 import QuizBoxList from "./QuizBoxList";
 import Select from "../../ui/Select";
+import Button from "../../ui/Button";
+import ProgressList from "./ProgressList";
 
 function Stats() {
     return (
@@ -21,15 +23,22 @@ function Stats() {
                 </StatsBoxHeader>
                 <QuizBoxList />
             </StatsBox>
-            <StatsBox height="30%">s</StatsBox>
+            <StatsBox height="30%">
+                <StatsBoxHeader>
+                    <Button type="outline">مشاهده همه</Button>
+                    <div>
+                        <p>میانگین نمرات همه</p>
+                    </div>
+                </StatsBoxHeader>
+                <ProgressList />
+            </StatsBox>
         </Row>
     );
 }
 
 const StatsBoxHeader = styled(Row)`
-    height: 12rem;
+    height: 10rem;
     padding: 2rem;
-    margin-bottom: 1rem;
 
     & div {
         display: flex;

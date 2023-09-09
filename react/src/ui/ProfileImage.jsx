@@ -1,4 +1,5 @@
 import { css, styled } from "styled-components";
+import { useSideBar } from "../Layout/SideBar/useSideBar";
 
 const ImageContainer = styled.div`
     background-color: antiquewhite;
@@ -14,10 +15,12 @@ const ImageContainer = styled.div`
 `;
 
 const StyledProfileImage = styled.img`
+    transition: all 0.2s;
     height: ${(props) => (props.$isOpen ? "10rem" : "7rem")};
 `;
 
-function ProfileImage({ src, isOpen }) {
+function ProfileImage({ src }) {
+    const isOpen = useSideBar();
     return (
         <ImageContainer $isOpen={isOpen}>
             <StyledProfileImage src={src} $isOpen={isOpen} />
