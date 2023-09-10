@@ -45,8 +45,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserBaseQuizBox
-        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password', 'password2', 'role')
-        read_only_fields = ('username',)
+        fields = ('id', 'email', 'first_name', 'last_name', 'password', 'password2', 'role')
+        read_only_fields = ('email',)
         
     
 class UserChangePasswordSerializer(serializers.Serializer):
