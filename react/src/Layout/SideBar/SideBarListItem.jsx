@@ -5,7 +5,7 @@ const StyledSideBarListItem = styled.div`
     position: relative;
     display: grid;
     column-gap: 6rem;
-    align-items: center;
+    align-items: ${(props) => (props.$isOpen ? "center" : "flex-start")};
     justify-content: center;
     color: var(--color-purple-300);
     font-weight: 600;
@@ -45,9 +45,12 @@ const StyledSideBarListItem = styled.div`
 `;
 
 const SideBarName = styled.p`
-    font-size: 1.8rem;
-    width: 100%;
-    justify-self: center;
+    transition: all 0.5s ease;
+    font-size: ${(props) => (props.$isOpen ? "1.5rem" : "0")};
+    opacity: ${(props) => (props.$isOpen ? "1" : "0")};
+    transform: ${(props) =>
+        props.$isOpen ? "translateX(0)" : "translateX(100px)"};
+    justify-self: flex-end;
 `;
 
 function SideBarListItem({ item }) {
@@ -55,7 +58,7 @@ function SideBarListItem({ item }) {
     const { isActive, name, icon } = item;
     return (
         <StyledSideBarListItem $isOpen={isOpen} $isActive={isActive}>
-            {isOpen && <SideBarName>{name}</SideBarName>}
+            <SideBarName $isOpen={isOpen}>{name}</SideBarName>
             {icon}
         </StyledSideBarListItem>
     );

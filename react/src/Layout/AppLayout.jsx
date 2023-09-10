@@ -5,8 +5,7 @@ import SideBar from "./SideBar/SideBar";
 
 const StyledAppLayout = styled.div`
     display: flex;
-    height: 100dvh;
-    width: 100%;
+    align-items: center;
 `;
 
 function AppLayout() {

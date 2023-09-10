@@ -6,6 +6,29 @@ import Select from "../../ui/Select";
 import Button from "../../ui/Button";
 import ProgressList from "./ProgressList";
 
+const StatsBoxHeader = styled(Row)`
+    height: 10rem;
+    padding: 1rem;
+
+    & div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & p:nth-child(1) {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-grey-800);
+        }
+
+        & p:nth-child(2) {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-grey-300);
+        }
+    }
+`;
+
 function Stats() {
     return (
         <Row type="vertical">
@@ -35,28 +58,5 @@ function Stats() {
         </Row>
     );
 }
-
-const StatsBoxHeader = styled(Row)`
-    height: 10rem;
-    padding: 2rem;
-
-    & div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        & p:nth-child(1) {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--color-grey-800);
-        }
-
-        & p:nth-child(2) {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--color-grey-300);
-        }
-    }
-`;
 
 export default Stats;

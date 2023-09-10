@@ -15,8 +15,8 @@ const ImageContainer = styled.div`
 `;
 
 const StyledProfileImage = styled.img`
-    transition: all 0.2s;
-    height: ${(props) => (props.$isOpen ? "10rem" : "7rem")};
+    transition: all 0.5s;
+    height: ${(props) => (props.$isOpen ? "12rem" : "7rem")};
 `;
 
 function ProfileImage({ src }) {

@@ -2,7 +2,6 @@ import { css, styled } from "styled-components";
 
 const Row = styled.div`
     display: flex;
-    width: 100%;
     ${(props) =>
         props.type === "horizontal" &&
         css`

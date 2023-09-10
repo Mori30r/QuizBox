@@ -9,10 +9,12 @@ import TopSideBar from "./TopSideBar";
 import Row from "../../ui/Row";
 
 const StyledSideBar = styled(Row)`
-    width: ${(props) => (props.$isOpen ? "30rem" : "10rem")};
+    width: ${(props) => (props.$isOpen ? "28rem" : "10rem")};
     background-color: var(--color-purple-0);
-    transition: all 0.2s;
-    overflow: hidden;
+    transition: all 0.5s;
+    border-radius: 25px;
+    margin: 0 1rem;
+    height: 98dvh;
 `;
 
 function SideBar() {
