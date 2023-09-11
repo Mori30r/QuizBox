@@ -19,9 +19,16 @@ const ProgressContainer = styled.div`
 
 const ProgressValue = styled.div`
     border-radius: 6px;
+    animation: setValue 1s ease 1s;
     width: 100%;
-    height: ${(props) => props.value};
     background-color: ${(props) => `var(--color-${props.color}-400)`};
+    height: ${(props) => props.value};
+
+    @keyframes setValue {
+        from {
+            height: 0;
+        }
+    }
 `;
 
 const ProgressLabel = styled.p`

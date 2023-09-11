@@ -6,7 +6,7 @@ import Select from "../../ui/Select";
 import Button from "../../ui/Button";
 import ProgressList from "./ProgressList";
 
-const StatsBoxHeader = styled(Row)`
+export const StatsBoxHeader = styled(Row)`
     height: 10rem;
     padding: 1rem;
 
@@ -29,9 +29,13 @@ const StatsBoxHeader = styled(Row)`
     }
 `;
 
+const StyledStats = styled(Row)`
+    height: 100dvh;
+`;
+
 function Stats() {
     return (
-        <Row type="vertical">
+        <StyledStats type="vertical">
             <StatsBox height="70%">
                 <StatsBoxHeader>
                     <Select fontSize="1.5rem">
@@ -55,7 +59,7 @@ function Stats() {
                 </StatsBoxHeader>
                 <ProgressList />
             </StatsBox>
-        </Row>
+        </StyledStats>
     );
 }
 

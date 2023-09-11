@@ -46,7 +46,8 @@ const StyledSideBarListItem = styled.div`
 
 const SideBarName = styled.p`
     transition: all 0.5s ease;
-    font-size: ${(props) => (props.$isOpen ? "1.5rem" : "0")};
+    font-size: ${(props) => (props.$isOpen ? "1.7rem" : "0")};
+    font-weight: 800;
     opacity: ${(props) => (props.$isOpen ? "1" : "0")};
     transform: ${(props) =>
         props.$isOpen ? "translateX(0)" : "translateX(100px)"};
