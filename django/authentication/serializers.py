@@ -10,16 +10,22 @@ from .utils import Util
 
 class UserSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(write_only=True, required=False)
+    date_of_birth = serializers.DateField(required=False)
+    phone_number = serializers.CharField(max_length=12, required=False)
 
     def validate(self, data):
         password = data.get('password')
         password2 = data.get('password2')
+        email = data.get('email')
 
         if not password:
             raise serializers.ValidationError("The password field is required.")
 
         if password != password2:
             raise serializers.ValidationError("Passwords do not match.")
+
+        elif not email:
+            raise serializers.ValidationError("The email field is required.")
 
         return data
 
@@ -34,19 +40,20 @@ class UserSerializer(serializers.ModelSerializer):
             password=password,
             first_name=validated_data.get('first_name'),
             last_name=validated_data.get('last_name'),
-            email=validated_data.get('email'),
-            role=validated_data.get('role')
+            role=validated_data.get('role'),
+            date_of_birth=validated_data.get('date_of_birth'),
+            phone_number=validated_data.get('phone_number')
         )
         user.set_password(password)
         user.save()
         Token.objects.create(user=user)
-        
+
         return user
 
     class Meta:
         model = UserBaseQuizBox
-        fields = ('id', 'email', 'first_name', 'last_name', 'password', 'password2', 'role')
-        read_only_fields = ('email',)
+        fields = ('id', 'email', 'first_name', 'last_name', 'password', 'password2', 'role', 'date_of_birth', 'phone_number')
+        read_only_fields = ('username',)
         
     
 class UserChangePasswordSerializer(serializers.Serializer):
