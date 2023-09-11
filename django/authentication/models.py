@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, Group, Permission
-from account.models import AccountProfile
+from django.contrib.auth.models import AbstractUser
 
 
 class UserBaseQuizBox(AbstractUser):
@@ -10,9 +9,8 @@ class UserBaseQuizBox(AbstractUser):
     ]
     
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
-    account = models.OneToOneField(AccountProfile, blank=True, null=True, on_delete=models.CASCADE, related_name='user_quiz_box')
-    user_groups = models.ManyToManyField(Group, verbose_name='Groups', blank=True, help_text='The groups this user belongs to.', related_name='user_quiz_boxes')
-    user_permissions = models.ManyToManyField(Permission, verbose_name='User permissions', blank=True, help_text='Specific permissions for this user.', related_name='user_quiz_boxes_custom')
+    date_of_birth = models.DateField(blank=True, null=True)
+    phone_number = models.CharField(max_length=12, blank=True, null=True)
 
     def __str__(self):
         return self.username
