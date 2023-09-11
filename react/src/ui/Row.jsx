@@ -14,7 +14,7 @@ const Row = styled.div`
         css`
             flex-direction: column;
             justify-content: space-between;
-            height: 100dvh;
+            height: 100%;
         `}
 `;
 

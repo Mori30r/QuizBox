@@ -6,7 +6,7 @@ const Quiz = styled.div`
     grid-template-columns: 4fr 1fr;
     align-items: center;
     align-self: flex-start;
-    width: 85%;
+    width: 43rem;
     height: 10rem;
     border-radius: 25px;
     background-color: ${(props) =>
