@@ -9,7 +9,7 @@ const StyledSideBarListItem = styled.div`
     justify-content: center;
     color: var(--color-purple-300);
     font-weight: 600;
-    height: 8rem;
+    height: 6rem;
     margin-bottom: 1.5rem;
     transition: all 0.5s;
 

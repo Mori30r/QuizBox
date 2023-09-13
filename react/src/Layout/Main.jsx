@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { StatsBoxHeader } from "./Stats/Stats";
 
 import Row from "../ui/Row";
 import Button from "./../ui/Button";
@@ -8,27 +7,38 @@ import SearchBox from "../ui/SearchBar";
 import NotificationIcon from "./../ui/NotificationIcon";
 
 import Boy from "../assets/images/boy.png";
+import { breakPoint11, breakPoint8 } from "../constants/breakpoints";
 
 const StyledMain = styled(Row)`
-    justify-content: flex-start;
-    justify-content: space-between;
-    width: 100%;
-    height: 98dvh;
+    overflow-y: auto;
     background-color: var(--color-purple-100);
-    border-radius: 25px;
-    margin: 1rem;
+    border-radius: 6px;
     padding: 4rem 6rem;
     box-shadow: 0 0 1rem var(--color-grey-400);
+    margin: 0 2rem;
+    flex: 1;
+
+    @media screen and (${breakPoint11}) {
+        margin: 0;
+        padding: 3rem 1.5rem;
+    }
 `;
 
 const MainHeader = styled(Row)`
-    margin-bottom: 8rem;
+    margin: 2rem 0;
 `;
 
 const CardsContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
     justify-items: center;
+
+    // to make cards one col
+    @media screen and (${breakPoint8}) {
+        grid-template-columns: 1fr;
+        row-gap: 2rem;
+    }
 `;
 
 function Main() {
@@ -39,7 +49,7 @@ function Main() {
                 <SearchBox />
             </MainHeader>
             <Card type="big" image={Boy} color="purple" />
-            <StatsBoxHeader>
+            <MainHeader>
                 <Button type="primary">مشاهده همه</Button>
                 <div>
                     <p
@@ -51,7 +61,7 @@ function Main() {
                         درس های من
                     </p>
                 </div>
-            </StatsBoxHeader>
+            </MainHeader>
             <CardsContainer>
                 <Card color="green" type="small" />
                 <Card color="red" type="small" />

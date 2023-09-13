@@ -1,15 +1,17 @@
 import { styled } from "styled-components";
 import Row from "../../ui/Row";
-import StatsBox from "./StatsBox";
 import QuizBoxList from "./QuizBoxList";
 import Select from "../../ui/Select";
 import Button from "../../ui/Button";
 import ProgressList from "./ProgressList";
+import {
+    breakPoint6,
+    breakPoint7,
+    breakPoint8,
+    breakPoint10,
+} from "../../constants/breakpoints";
 
 export const StatsBoxHeader = styled(Row)`
-    height: 10rem;
-    padding: 1rem;
-
     & div {
         display: flex;
         flex-direction: column;
@@ -29,14 +31,51 @@ export const StatsBoxHeader = styled(Row)`
     }
 `;
 
-const StyledStats = styled(Row)`
-    height: 100dvh;
+const CalenderBox = styled(Row)`
+    background-color: var(--color-purple-0);
+    justify-content: flex-start;
+    width: 45rem;
+    border-radius: 25px;
+    padding: 2rem;
+    gap: 1rem;
+    height: 60%;
+    margin-bottom: 2rem;
+
+    @media screen and (${breakPoint6}) {
+        width: 43rem;
+    }
+
+    @media screen and (${breakPoint7}) {
+        width: 38rem;
+    }
+
+    @media screen and (${breakPoint8}) {
+        width: 40rem;
+    }
+
+    @media screen and (${breakPoint8}) {
+        width: 35rem;
+    }
+
+    @media screen and (${breakPoint10}) {
+        display: none;
+    }
+`;
+const ProgressBox = styled(Row)`
+    height: 40%;
+    background-color: var(--color-purple-0);
+    border-radius: 25px;
+    padding: 1rem 2rem;
+
+    @media screen and (${breakPoint10}) {
+        display: none;
+    }
 `;
 
 function Stats() {
     return (
-        <StyledStats type="vertical">
-            <StatsBox height="70%">
+        <Row type="vertical">
+            <CalenderBox type="vertical">
                 <StatsBoxHeader>
                     <Select fontSize="1.5rem">
                         <option value="today">امروز</option>
@@ -49,8 +88,8 @@ function Stats() {
                     </div>
                 </StatsBoxHeader>
                 <QuizBoxList />
-            </StatsBox>
-            <StatsBox height="30%">
+            </CalenderBox>
+            <ProgressBox type="vertical">
                 <StatsBoxHeader>
                     <Button type="outline">مشاهده همه</Button>
                     <div>
@@ -58,8 +97,8 @@ function Stats() {
                     </div>
                 </StatsBoxHeader>
                 <ProgressList />
-            </StatsBox>
-        </StyledStats>
+            </ProgressBox>
+        </Row>
     );
 }
 

@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import Row from "../../ui/Row";
+import { breakPoint6, breakPoint9 } from "../../constants/breakpoints";
 
 const Quiz = styled.div`
     display: grid;
@@ -7,7 +8,7 @@ const Quiz = styled.div`
     align-items: center;
     align-self: flex-start;
     width: 43rem;
-    height: 10rem;
+    height: 9rem;
     border-radius: 25px;
     background-color: ${(props) =>
         props.$active ? `var(--color-green-200)` : `var(--color-purple-200)`};
@@ -16,6 +17,8 @@ const Quiz = styled.div`
             props.$active
                 ? `var(--color-green-200)`
                 : `var(--color-purple-200)`};
+    @media screen and (${breakPoint9}) {
+    }
 `;
 
 const CircleInQuiz = styled.div`
@@ -25,6 +28,10 @@ const CircleInQuiz = styled.div`
     height: 5rem;
     background-color: var(--color-purple-0);
     border-radius: 100%;
+
+    @media screen and (${breakPoint9}) {
+        margin-right: 1rem;
+    }
 
     &::before {
         content: "";
@@ -57,6 +64,10 @@ const QuizName = styled.p`
     color: ${(props) =>
         props.$active ? `var(--color-green-0)` : `var(--color-purple-0)`};
     font-size: 2.3rem;
+
+    @media screen and (${breakPoint9}) {
+        font-size: 2rem;
+    }
 `;
 const QuizTeacher = styled.p`
     font-weight: 500;
@@ -71,6 +82,7 @@ const QuizTime = styled.div`
     justify-content: space-between;
     align-items: center;
     padding-left: 0.5rem;
+    margin-left: 1rem;
     height: 8rem;
     width: 6rem;
     border-left: solid var(--color-purple-200) 0.5rem;
@@ -78,10 +90,14 @@ const QuizTime = styled.div`
     color: var(--color-purple-200);
     font-weight: 400;
     font-size: 1.3rem;
+
+    @media screen and (${breakPoint6}) {
+        width: 6rem;
+    }
 `;
 
 const StyledQuizBox = styled(Row)`
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 `;
 
 const OnlineQuizText = styled.p`
