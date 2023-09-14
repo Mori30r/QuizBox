@@ -4,6 +4,8 @@ import QuizBoxList from "./Calender/QuizBoxList";
 import Select from "../../ui/Select";
 import Button from "../../ui/Button";
 import ProgressList from "./ProgressList/ProgressList";
+import Heading from "../../ui/Heading";
+import SubHeading from "./../../ui/SubHeading";
 import {
     breakPoint6,
     breakPoint7,
@@ -16,18 +18,6 @@ export const StatsBoxHeader = styled(Row)`
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        & p:nth-child(1) {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--color-grey-800);
-        }
-
-        & p:nth-child(2) {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--color-grey-300);
-        }
     }
 `;
 
@@ -83,8 +73,8 @@ function Stats() {
                         <option value="next-week">هفته آینده</option>
                     </Select>
                     <div>
-                        <p>تقویم</p>
-                        <p>شانزدهم شهریور 1402</p>
+                        <Heading type="black">تقویم</Heading>
+                        <SubHeading>شانزدهم شهریور 1402</SubHeading>
                     </div>
                 </StatsBoxHeader>
                 <QuizBoxList />
@@ -93,7 +83,7 @@ function Stats() {
                 <StatsBoxHeader>
                     <Button type="outline">مشاهده همه</Button>
                     <div>
-                        <p>میانگین نمرات همه</p>
+                        <Heading small>میانگین نمرات همه</Heading>
                     </div>
                 </StatsBoxHeader>
                 <ProgressList />

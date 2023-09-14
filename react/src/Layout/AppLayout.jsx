@@ -1,8 +1,8 @@
 import Stats from "./Stats/Stats";
-import Main from "./Main";
 import SideBar from "./SideBar/SideBar";
 import Row from "../ui/Row";
 import { styled } from "styled-components";
+import { Outlet } from "react-router-dom";
 
 const StyledAppLayout = styled(Row)`
     align-items: center;
@@ -14,7 +14,7 @@ function AppLayout() {
     return (
         <StyledAppLayout>
             <Stats />
-            <Main />
+            <Outlet />
             <SideBar />
         </StyledAppLayout>
     );

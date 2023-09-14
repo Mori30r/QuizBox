@@ -1,10 +1,11 @@
 import { styled } from "styled-components";
 
 import Row from "../ui/Row";
-import Button from "./../ui/Button";
 import Card from "../ui/Card";
+import Button from "../ui/Button";
+import Heading from "./../ui/Heading";
 import SearchBox from "../ui/SearchBar";
-import NotificationIcon from "./../ui/NotificationIcon";
+import NotificationIcon from "../ui/NotificationIcon";
 
 import Boy from "../assets/images/boy.png";
 import { breakPoint11, breakPoint8 } from "../constants/breakpoints";
@@ -40,13 +41,7 @@ const CardsContainer = styled.div`
     }
 `;
 
-const Header = styled.p`
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: var(--color-grey-0);
-`;
-
-function Main() {
+function Home() {
     return (
         <StyledMain type="vertical">
             <MainHeader>
@@ -62,7 +57,7 @@ function Main() {
             </Card>
             <MainHeader>
                 <Button type="primary">مشاهده همه</Button>
-                <Header>درس های من</Header>
+                <Heading type="white">درس های من</Heading>
             </MainHeader>
             <CardsContainer>
                 <Card color="green" type="small">
@@ -83,4 +78,4 @@ function Main() {
     );
 }
 
-export default Main;
+export default Home;

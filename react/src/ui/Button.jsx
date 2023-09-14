@@ -1,5 +1,5 @@
 import { css, styled } from "styled-components";
-import { breakPoint4, breakPoint5 } from "../constants/breakpoints";
+import { breakPoint4 } from "../constants/breakpoints";
 
 const types = {
     primary: css`

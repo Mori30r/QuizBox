@@ -1,6 +1,7 @@
 import { css, styled } from "styled-components";
 
 const ImageContainer = styled.div`
+    position: relative;
     background-color: antiquewhite;
     display: flex;
     justify-content: center;

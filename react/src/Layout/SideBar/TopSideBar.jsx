@@ -3,6 +3,7 @@ import { HiBars3, HiXMark } from "react-icons/hi2";
 
 import Profile from "../../assets/images/profile.png";
 import ProfileImage from "../../ui/ProfileImage";
+import { NavLink } from "react-router-dom";
 
 const StyledTopSideBar = styled.div`
     display: flex;
@@ -41,22 +42,24 @@ function TopSideBar({ onClick }) {
     const { isOpen } = useTheme();
     return (
         <StyledTopSideBar type="vertical">
-            <MenuIconContainer $isOpen={isOpen}>
+            <MenuIconContainer>
                 {isOpen ? (
                     <HiXMark
                         onClick={onClick}
                         size={30}
-                        color="--var-color-purple-300"
+                        color="var(--color-purple-300)"
                     />
                 ) : (
                     <HiBars3
                         onClick={onClick}
                         size={30}
-                        color="--var-color-purple-300"
+                        color="var(--color-purple-300)"
                     />
                 )}
             </MenuIconContainer>
-            <ProfileImage src={Profile} isOpen={isOpen} />
+            <NavLink to="profile/edit">
+                <ProfileImage src={Profile} />
+            </NavLink>
             {isOpen && (
                 <>
                     <Name>جواد جوادی</Name>
