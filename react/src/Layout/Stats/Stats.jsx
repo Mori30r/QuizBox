@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
 import Row from "../../ui/Row";
-import QuizBoxList from "./QuizBoxList";
+import QuizBoxList from "./Calender/QuizBoxList";
 import Select from "../../ui/Select";
 import Button from "../../ui/Button";
-import ProgressList from "./ProgressList";
+import ProgressList from "./ProgressList/ProgressList";
 import {
     breakPoint6,
     breakPoint7,

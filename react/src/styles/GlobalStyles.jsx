@@ -101,21 +101,17 @@ const GlobalStyles = styled.createGlobalStyle`
         border-radius: 25px;
     }
 
-    /* Track */
     ::-webkit-scrollbar-track {
-        background: var(--color-purple-0);
         border-radius: 25px;
     }
 
-    /* Handle */
     ::-webkit-scrollbar-thumb {
         background: var(--color-purple-200);
         border-radius: 25px;
     }
 
-    /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: var(--color-purple-400);
         border-radius: 25px;
     }
 `;

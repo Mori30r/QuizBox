@@ -1,7 +1,5 @@
-import { css, styled } from "styled-components";
+import { css, styled, useTheme } from "styled-components";
 import { HiBars3, HiXMark } from "react-icons/hi2";
-
-import { useSideBar } from "./useSideBar";
 
 import Profile from "../../assets/images/profile.png";
 import ProfileImage from "../../ui/ProfileImage";
@@ -20,7 +18,7 @@ const MenuIconContainer = styled.div`
     cursor: pointer;
 
     ${(props) =>
-        props.$isOpen &&
+        props.theme.isOpen &&
         css`
             align-self: flex-end;
             margin-right: 2rem;
@@ -40,7 +38,7 @@ const Status = styled.p`
 `;
 
 function TopSideBar({ onClick }) {
-    const isOpen = useSideBar();
+    const { isOpen } = useTheme();
     return (
         <StyledTopSideBar type="vertical">
             <MenuIconContainer $isOpen={isOpen}>

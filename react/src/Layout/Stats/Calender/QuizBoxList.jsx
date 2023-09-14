@@ -1,5 +1,5 @@
 import QuizBox from "./QuizBox";
-import { list } from "../../data/StatsQuizBoxLinks";
+import { list } from "../../../data/StatsQuizBoxLinks";
 
 function QuizBoxList() {
     let quizList = list.slice().sort((a, b) => b.active - a.active);

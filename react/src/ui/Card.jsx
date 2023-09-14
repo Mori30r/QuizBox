@@ -1,6 +1,5 @@
-import { css, styled } from "styled-components";
+import { css, styled, ThemeProvider } from "styled-components";
 import Row from "./Row";
-import Button from "./Button";
 import {
     breakPoint1,
     breakPoint11,
@@ -8,27 +7,30 @@ import {
     breakPoint6,
     breakPoint9,
 } from "./../constants/breakpoints";
+import Button from "./Button";
 
 const StyledCard = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 5rem 1fr 1fr;
     position: relative;
     align-self: center;
-    box-shadow: ${(props) => `0 0 1rem var(--color-${props.color}-200)`};
+    box-shadow: ${(props) => `0 0 1rem var(--color-${props.theme.color}-200)`};
     background: ${(props) =>
         `linear-gradient(
             45deg,
-            var(--color-${props.color}-400) 0%,
-            var(--color-${props.color}-200) 100%
+            var(--color-${props.theme.color}-400) 0%,
+            var(--color-${props.theme.color}-200) 100%
             )`};
     ${(props) =>
-        props.type === "small" &&
+        props.theme.type === "small" &&
         css`
-            display: flex;
             height: 27rem;
+            width: 80%;
             justify-content: space-between;
             padding: 2rem;
-            width: 80%;
             @media screen and (${breakPoint6}) {
-                width: 90%;
+                width: 70%;
                 height: 24rem;
             }
 
@@ -37,7 +39,7 @@ const StyledCard = styled.div`
             }
         `}
     ${(props) =>
-        props.type === "big" &&
+        props.theme.type === "big" &&
         css`
             height: 30rem;
             padding: 2rem 4rem;
@@ -54,9 +56,17 @@ const StyledCard = styled.div`
         `}
 `;
 
-const CardImage = styled.img`
+function Card({ type, color, children }) {
+    return (
+        <ThemeProvider theme={{ type, color }}>
+            <StyledCard>{children}</StyledCard>
+        </ThemeProvider>
+    );
+}
+
+const StyledImage = styled.img`
     position: absolute;
-    height: 100%;
+    height: 90%;
     top: -7rem;
     left: -2rem;
 
@@ -79,99 +89,68 @@ const CardImage = styled.img`
     }
 `;
 
-const Hint = styled.p`
-    color: ${(props) => `var(--color-${props.color}-0)`};
+function Image({ image }) {
+    return <StyledImage src={image} />;
+}
+
+const StyledHint = styled.p`
+    color: ${(props) => `var(--color-${props.theme.color}-0)`};
     font-size: 1.4rem;
     font-weight: 500;
     z-index: 1;
+    grid-column: 2/3;
+    grid-row: 1/2;
 `;
 
-const CourseName = styled.p`
+function Hint({ children }) {
+    return <StyledHint>{children}</StyledHint>;
+}
+
+const StyledTitle = styled.p`
     align-self: flex-end;
-    color: ${(props) => `var(--color-${props.color}-0)`};
-    width: 70%;
-    font-size: ${(props) => (props.type === "big" ? "3rem" : "2.5rem")};
+    justify-self: flex-end;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    color: ${(props) => `var(--color-${props.theme.color}-0)`};
+    font-size: ${(props) => (props.theme.type === "big" ? "3rem" : "2.5rem")};
     font-weight: 1000;
     z-index: 1;
-    text-shadow: ${(props) => `0 .5rem 1rem var(--color-${props.color}-400)`};
-    overflow: hidden;
+    text-shadow: ${(props) =>
+        `0 .5rem 1rem var(--color-${props.theme.color}-400)`};
 
     @media screen and (${breakPoint5}) {
-        width: 80%;
         font-size: 3rem;
     }
 
     @media screen and (${breakPoint6}) {
-        width: 60%;
-        font-size: ${(props) => (props.type === "big" ? "3.5rem" : "2.3rem")};
-    }
-
-    @media screen and (${breakPoint11}) {
-        width: 100%;
+        font-size: ${(props) =>
+            props.theme.type === "big" ? "3.5rem" : "2.3rem"};
     }
 `;
 
-const QuizDate = styled.span`
-    color: ${(props) => `var(--color-${props.color}-0)`};
+function Title({ children }) {
+    return <StyledTitle>{children}</StyledTitle>;
+}
+
+const StyledDate = styled.span`
+    color: ${(props) => `var(--color-${props.theme.color}-0)`};
     font-size: 1.4rem;
     text-decoration: underline dotted;
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
     align-self: center;
+    justify-self: flex-end;
 `;
 
-const CardTexts = styled(Row)`
-    gap: 2rem;
-    width: 100%;
-`;
-
-const CardButtons = styled(Row)`
-    width: 70%;
-    align-items: center;
-`;
-
-function Card({ type, image, color }) {
-    return (
-        <StyledCard type={type} color={color}>
-            {type === "big" ? (
-                <>
-                    <CardImage src={image} />
-                    <Row type="vertical">
-                        <Hint color={color}>! به عنوان روح وارد کوئیز شو</Hint>
-                        <CourseName type={type} color={color}>
-                            ساختمان داده و الگوریتم ها
-                        </CourseName>
-                        <Row>
-                            <Button type="big">ورود به کوئیز</Button>
-                            <QuizDate color={color}>تا ساعت 12:30</QuizDate>
-                        </Row>
-                    </Row>
-                </>
-            ) : (
-                <>
-                    <CardButtons type="vertical">
-                        <Capacity />
-                        <Button type="big">ورود به درس</Button>
-                    </CardButtons>
-                    <CardTexts type="vertical">
-                        <Hint color={color}>! پروژه رو یادت نره</Hint>
-                        <CourseName color={color}>
-                            ساختمان داده و الگوریتم ها
-                        </CourseName>
-                        <p>
-                            <QuizDate color={color}>
-                                امتحان 26 اردیبهشت
-                            </QuizDate>
-                        </p>
-                    </CardTexts>
-                </>
-            )}
-        </StyledCard>
-    );
+function Date({ children }) {
+    return <StyledDate>{children}</StyledDate>;
 }
 
 const StyledCapacity = styled(Row)`
     align-items: center;
     justify-content: flex-start;
     gap: 1rem;
+    justify-self: flex-start;
 `;
 
 const CapacityNumber = styled.p`
@@ -183,10 +162,10 @@ const CapacityNumber = styled.p`
     padding: 3rem;
 `;
 
-function Capacity() {
+function Capacity({ children }) {
     return (
         <StyledCapacity type="vertical">
-            <CapacityNumber>32</CapacityNumber>
+            <CapacityNumber>{children}</CapacityNumber>
             <p
                 style={{
                     color: "var(--color-purple-0)",
@@ -198,5 +177,27 @@ function Capacity() {
         </StyledCapacity>
     );
 }
+
+const ButtonContainer = styled.div`
+    grid-column: 1/2;
+    grid-row: 3 / 4;
+    align-self: center;
+    justify-self: flex-start;
+`;
+
+function CardButton({ children }) {
+    return (
+        <ButtonContainer>
+            <Button type="big">{children}</Button>
+        </ButtonContainer>
+    );
+}
+
+Card.Button = CardButton;
+Card.Capacity = Capacity;
+Card.Title = Title;
+Card.Image = Image;
+Card.Hint = Hint;
+Card.Date = Date;
 
 export default Card;

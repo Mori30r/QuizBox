@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import Row from "../../ui/Row";
-import { breakPoint6, breakPoint9 } from "../../constants/breakpoints";
+import Row from "../../../ui/Row";
+import { breakPoint6, breakPoint9 } from "../../../constants/breakpoints";
 
 const Quiz = styled.div`
     display: grid;

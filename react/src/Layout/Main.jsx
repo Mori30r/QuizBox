@@ -34,11 +34,16 @@ const CardsContainer = styled.div`
     column-gap: 2rem;
     justify-items: center;
 
-    // to make cards one col
     @media screen and (${breakPoint8}) {
         grid-template-columns: 1fr;
         row-gap: 2rem;
     }
+`;
+
+const Header = styled.p`
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--color-grey-0);
 `;
 
 function Main() {
@@ -48,23 +53,31 @@ function Main() {
                 <NotificationIcon />
                 <SearchBox />
             </MainHeader>
-            <Card type="big" image={Boy} color="purple" />
+            <Card type="big" color="purple">
+                <Card.Image image={Boy} />
+                <Card.Hint>! به عنوان روح وارد کوئیز شو</Card.Hint>
+                <Card.Title>ساختمان داده و الگوریتم ها</Card.Title>
+                <Card.Button>ورود به کوئیز</Card.Button>
+                <Card.Date>تا ساعت 12:30</Card.Date>
+            </Card>
             <MainHeader>
                 <Button type="primary">مشاهده همه</Button>
-                <div>
-                    <p
-                        style={{
-                            color: "var(--color-grey-0)",
-                            fontSize: "3.5rem",
-                        }}
-                    >
-                        درس های من
-                    </p>
-                </div>
+                <Header>درس های من</Header>
             </MainHeader>
             <CardsContainer>
-                <Card color="green" type="small" />
-                <Card color="red" type="small" />
+                <Card color="green" type="small">
+                    <Card.Hint>! پروژه رو یادت نره</Card.Hint>
+                    <Card.Title>نظریه گراف</Card.Title>
+                    <Card.Capacity>15</Card.Capacity>
+                    <Card.Date>امتحان 26 اردیبهشت</Card.Date>
+                    <Card.Button type="big">ورود به درس</Card.Button>
+                </Card>
+                <Card color="red" type="small">
+                    <Card.Title>طراحی الگوریتم</Card.Title>
+                    <Card.Capacity>28</Card.Capacity>
+                    <Card.Date>امتحان 26 اردیبهشت</Card.Date>
+                    <Card.Button>ورود به درس</Card.Button>
+                </Card>
             </CardsContainer>
         </StyledMain>
     );

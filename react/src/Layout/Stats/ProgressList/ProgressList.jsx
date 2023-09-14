@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import { list } from "../../data/StatsProgress";
-import Progress from "../../ui/Progress";
+import { list } from "../../../data/StatsProgress";
+import Progress from "../../../ui/Progress";
 
 const StyledProgressList = styled.div`
     display: flex;

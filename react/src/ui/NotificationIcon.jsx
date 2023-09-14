@@ -24,7 +24,7 @@ function NotificationIcon() {
     return (
         <IconContainer>
             <NotificationIndicator>4</NotificationIndicator>
-            <HiBell size={36} color="var(--color-orange-200)" />
+            <HiBell size="3.5rem" color="var(--color-orange-200)" />
         </IconContainer>
     );
 }
