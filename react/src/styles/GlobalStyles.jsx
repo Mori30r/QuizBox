@@ -1,4 +1,10 @@
 import { createGlobalStyle } from "styled-components";
+import {
+    breakPoint1,
+    breakPoint3,
+    breakPoint4,
+    breakPoint5,
+} from "./../constants/breakpoints";
 
 const styled = { createGlobalStyle };
 
@@ -33,15 +39,6 @@ const GlobalStyles = styled.createGlobalStyle`
         --color-orange-0: #ffe8cc;
         --color-orange-200: #ffa94d;
         --color-orange-400: #e67700;
-
-        --border-radius-tiny: 3px;
-        --border-radius-sm: 5px;
-        --border-radius-md: 7px;
-        --border-radius-lg: 9px;
-
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-        --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
-        --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
     }
 
     *,
@@ -57,6 +54,22 @@ const GlobalStyles = styled.createGlobalStyle`
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         font-size: 62.5%;
+
+        @media screen and (${breakPoint1}) {
+            font-size: 60%;
+        }
+
+        @media screen and (${breakPoint3}) {
+            font-size: 59%;
+        }
+
+        @media screen and (${breakPoint4}) {
+            font-size: 58%;
+        }
+
+        @media screen and (${breakPoint5}) {
+            font-size: 55%;
+        }
     }
 
     body {
@@ -81,6 +94,25 @@ const GlobalStyles = styled.createGlobalStyle`
 
     *:disabled {
         cursor: not-allowed;
+    }
+
+    ::-webkit-scrollbar {
+        width: 1rem;
+        border-radius: 25px;
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 25px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-purple-200);
+        border-radius: 25px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-purple-400);
+        border-radius: 25px;
     }
 `;
 

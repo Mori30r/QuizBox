@@ -1,20 +1,19 @@
 import { css, styled } from "styled-components";
-import { useSideBar } from "./useSideBar";
 
-const StyledSideBarListItem = styled.div`
+const StyledSideBarItem = styled.div`
     position: relative;
     display: grid;
     column-gap: 6rem;
-    align-items: ${(props) => (props.$isOpen ? "center" : "flex-start")};
+    align-items: ${(props) => (props.theme.isOpen ? "center" : "flex-start")};
     justify-content: center;
     color: var(--color-purple-300);
     font-weight: 600;
-    height: 8rem;
+    height: 6rem;
     margin-bottom: 1.5rem;
     transition: all 0.5s;
 
     ${(props) =>
-        props.$isOpen &&
+        props.theme.isOpen &&
         css`
             grid-template-columns: 3fr 1fr;
         `}
@@ -31,7 +30,7 @@ const StyledSideBarListItem = styled.div`
 
     ${(props) =>
         props.$isActive &&
-        props.$isOpen &&
+        props.theme.isOpen &&
         css`
             &::before {
                 content: "";
@@ -46,22 +45,21 @@ const StyledSideBarListItem = styled.div`
 
 const SideBarName = styled.p`
     transition: all 0.5s ease;
-    font-size: ${(props) => (props.$isOpen ? "1.7rem" : "0")};
+    font-size: ${(props) => (props.theme.isOpen ? "1.7rem" : "0")};
     font-weight: 800;
-    opacity: ${(props) => (props.$isOpen ? "1" : "0")};
+    opacity: ${(props) => (props.theme.isOpen ? "1" : "0")};
     transform: ${(props) =>
-        props.$isOpen ? "translateX(0)" : "translateX(100px)"};
+        props.theme.isOpen ? "translateX(0)" : "translateX(100px)"};
     justify-self: flex-end;
 `;
 
 function SideBarListItem({ item }) {
-    const isOpen = useSideBar();
     const { isActive, name, icon } = item;
     return (
-        <StyledSideBarListItem $isOpen={isOpen} $isActive={isActive}>
-            <SideBarName $isOpen={isOpen}>{name}</SideBarName>
+        <StyledSideBarItem $isActive={isActive}>
+            <SideBarName>{name}</SideBarName>
             {icon}
-        </StyledSideBarListItem>
+        </StyledSideBarItem>
     );
 }
 
