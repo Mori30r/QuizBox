@@ -8,4 +8,5 @@ export const breakPoint7 = "max-width: 1250px";
 export const breakPoint8 = "max-width: 1150px";
 export const breakPoint9 = "max-width: 1010px";
 export const breakPoint10 = "max-width: 900px";
-export const breakPoint11 = "max-width: 660px";
+export const breakPoint11 = "max-width: 800px";
+export const breakPoint12 = "max-width: 660px";

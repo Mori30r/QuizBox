@@ -10,7 +10,7 @@ import {
     breakPoint6,
     breakPoint7,
     breakPoint8,
-    breakPoint10,
+    breakPoint9,
 } from "../../constants/breakpoints";
 
 export const StatsBoxHeader = styled(Row)`
@@ -47,7 +47,7 @@ const CalenderBox = styled(Row)`
         width: 35rem;
     }
 
-    @media screen and (${breakPoint10}) {
+    @media screen and (${breakPoint9}) {
         display: none;
     }
 `;
@@ -57,7 +57,7 @@ const ProgressBox = styled(Row)`
     border-radius: 25px;
     padding: 1rem 2rem;
 
-    @media screen and (${breakPoint10}) {
+    @media screen and (${breakPoint9}) {
         display: none;
     }
 `;

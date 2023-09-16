@@ -1,4 +1,4 @@
-import { HiOutlinePhoto, HiPhoto, HiXMark } from "react-icons/hi2";
+import { HiOutlinePhoto, HiXMark } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
@@ -11,6 +11,7 @@ import SubHeading from "../ui/SubHeading";
 import ProfileImage from "./../ui/ProfileImage";
 
 import Profile from "../assets/images/profile.png";
+import { breakPoint11 } from "../constants/breakpoints";
 
 const Main = styled.main`
     display: flex;
@@ -23,14 +24,30 @@ const Main = styled.main`
     overflow-y: auto;
     box-shadow: 0 0 1rem var(--color-grey-400);
     margin: 0 2rem;
+
+    @media screen and (${breakPoint11}) {
+        margin: 0;
+        padding: 4rem;
+    }
 `;
 
 const Header = styled(Row)`
     margin-bottom: 3rem;
+
+    @media screen and (${breakPoint11}) {
+        margin-bottom: 2rem;
+    }
 `;
 const Form = styled.form`
     display: grid;
     grid-template-columns: 10fr 1fr;
+
+    @media screen and (${breakPoint11}) {
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-content: center;
+        row-gap: 2rem;
+    }
 `;
 
 const Container = styled.div`
@@ -44,6 +61,12 @@ const Container = styled.div`
 
 const ImageContainer = styled.div`
     position: relative;
+    height: 8rem;
+    @media screen and (${breakPoint11}) {
+        grid-row: 1 / 2;
+        align-self: center;
+        justify-self: center;
+    }
 `;
 const IconContainer = styled.div`
     position: absolute;
@@ -101,17 +124,15 @@ function ProfileEdit() {
                     </Input>
                     <Button type="primary">اعمال تغییرات</Button>
                 </Container>
-                <div>
-                    <ImageContainer>
-                        <ProfileImage src={Profile} />
-                        <IconContainer>
-                            <HiOutlinePhoto
-                                size={15}
-                                color="var(--color-purple-0)"
-                            />
-                        </IconContainer>
-                    </ImageContainer>
-                </div>
+                <ImageContainer>
+                    <ProfileImage src={Profile} />
+                    <IconContainer>
+                        <HiOutlinePhoto
+                            size={15}
+                            color="var(--color-purple-0)"
+                        />
+                    </IconContainer>
+                </ImageContainer>
             </Form>
         </Main>
     );

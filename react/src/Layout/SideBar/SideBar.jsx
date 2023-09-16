@@ -6,7 +6,7 @@ import { list1, list2 } from "../../data/SideBarLinks";
 import SideBarList from "./SideBarList";
 import TopSideBar from "./TopSideBar";
 import Row from "../../ui/Row";
-import { breakPoint11 } from "../../constants/breakpoints";
+import { breakPoint12 } from "../../constants/breakpoints";
 
 const StyledSideBar = styled(Row)`
     z-index: 2;
@@ -15,7 +15,7 @@ const StyledSideBar = styled(Row)`
     transition: all 0.5s;
     border-radius: 25px;
 
-    @media screen and (${breakPoint11}) {
+    @media screen and (${breakPoint12}) {
         width: ${(props) => (props.theme.isOpen ? "100%" : "10rem")};
         height: ${(props) => (props.theme.isOpen ? "100%" : "7rem")};
         position: absolute;

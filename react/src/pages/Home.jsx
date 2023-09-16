@@ -8,7 +8,7 @@ import SearchBox from "../ui/SearchBar";
 import NotificationIcon from "../ui/NotificationIcon";
 
 import Boy from "../assets/images/boy.png";
-import { breakPoint11, breakPoint8 } from "../constants/breakpoints";
+import { breakPoint12, breakPoint8 } from "../constants/breakpoints";
 
 const StyledMain = styled(Row)`
     overflow-y: auto;
@@ -19,7 +19,7 @@ const StyledMain = styled(Row)`
     margin: 0 2rem;
     flex: 1;
 
-    @media screen and (${breakPoint11}) {
+    @media screen and (${breakPoint12}) {
         margin: 0;
         padding: 3rem 1.5rem;
     }

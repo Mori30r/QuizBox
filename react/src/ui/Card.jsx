@@ -2,10 +2,10 @@ import { css, styled, ThemeProvider } from "styled-components";
 import Row from "./Row";
 import {
     breakPoint1,
-    breakPoint11,
     breakPoint5,
     breakPoint6,
     breakPoint9,
+    breakPoint12,
 } from "./../constants/breakpoints";
 import Button from "./Button";
 
@@ -34,7 +34,7 @@ const StyledCard = styled.div`
                 height: 24rem;
             }
 
-            @media screen and (${breakPoint11}) {
+            @media screen and (${breakPoint12}) {
                 width: 100%;
             }
         `}
@@ -49,7 +49,7 @@ const StyledCard = styled.div`
                 height: 30rem;
             }
 
-            @media screen and (${breakPoint11}) {
+            @media screen and (${breakPoint12}) {
                 width: 100%;
                 padding: 1rem 2rem;
             }
@@ -84,7 +84,7 @@ const StyledImage = styled.img`
         top: -5rem;
     }
 
-    @media screen and (${breakPoint11}) {
+    @media screen and (${breakPoint12}) {
         display: none;
     }
 `;
