@@ -12,8 +12,7 @@ class Teacher(models.Model):
     specialization = models.CharField(max_length=60, verbose_name="رشته تدریس استاد")
     teacher_groups = models.ManyToManyField(Group, blank=True, related_name='teachers')
     teacher_user_permissions = models.ManyToManyField(Permission, blank=True, related_name='teachers')
-    course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='courses', null=True)
-    
+    course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='courses', null=True)    
     class Meta:
         verbose_name = 'Teacher'
         verbose_name_plural = 'Teachers'
@@ -33,6 +32,7 @@ class Student(models.Model):
     enrollment_date = models.DateField(verbose_name="تاریخ ورود دانشجو به دانشگاه")
     student_groups = models.ManyToManyField(Group, blank=True, related_name='students')
     student_user_permissions = models.ManyToManyField(Permission, blank=True, related_name='students')
+    courses = models.ManyToManyField('Course', related_name='student_courses')
     
     class Meta:
         verbose_name = 'Student'
@@ -44,6 +44,7 @@ class Student(models.Model):
         
 class Course(models.Model):
     name = models.CharField(max_length=50)
+    students = models.ManyToManyField(Student, blank=True, related_name='course_students')
     
     def __str__(self):
         return str(self.id)
@@ -56,4 +57,4 @@ class Enrollment(models.Model):
     is_approved = models.BooleanField(default=False)
     
     def __str__(self):
-        return str(self.student.user.first_name)
+        return str(self.id)
