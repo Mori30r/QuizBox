@@ -90,6 +90,43 @@ def update_account(request):
 
     return Response({'message': 'Invalid user role.'}, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([])
+def teacher_list(request):
+    if request.method == 'GET':
+        teachers = Teacher.objects.all()
+        serializer = TeacherSerializer(teachers, many=True)
+        teachers_data = serializer.data    
+        return Response(teachers_data, status=status.HTTP_200_OK)
+    
+@api_view(['GET'])
+@permission_classes([])
+def teacher_details(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    serializer = TeacherSerializer(teacher)
+    teacher_data = serializer.data
+    return Response(teacher_data, status=status.HTTP_200_OK)
+    
+
+
+
+@api_view(['GET'])
+@permission_classes([])
+def student_list(request):
+    if request.method == 'GET':
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many=True)
+        students_data = serializer.data
+        return Response(students_data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def student_detail(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    serializer = StudentSerializer(student)
+    student_data = serializer.data
+    return Response(student_data, status=status.HTTP_200_OK)
+
 
 
 
@@ -227,7 +264,7 @@ def list_approved_students(request, teacher_id):
 @permission_classes([IsAuthenticated])
 def list_approved_teachers_by_student(request, student_id):
     '''
-    لیست استادهایی که دانشجو توسط آن‌ها تایید شده است را برمی‌گرداند.
+    لیست استادهایی که آن دانشجو را تایید کرده است را برمی‌گرداند.
     '''
 
     enrollments = Enrollment.objects.filter(student_id=student_id)
