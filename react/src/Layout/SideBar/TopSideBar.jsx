@@ -1,9 +1,11 @@
 import { css, styled, useTheme } from "styled-components";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 
-import Profile from "../../assets/images/profile.png";
 import ProfileImage from "../../ui/ProfileImage";
-import { NavLink } from "react-router-dom";
+import RouteNavLink from "../../ui/RouteNavLink";
+
+import Profile from "../../assets/images/profile.png";
+import { PROFILE_EDIT } from "../../constants/pagesAddress";
 
 const StyledTopSideBar = styled.div`
     display: flex;
@@ -12,6 +14,10 @@ const StyledTopSideBar = styled.div`
     justify-content: center;
     gap: 0.5rem;
     margin-bottom: 3rem;
+
+    & img {
+        height: ${(props) => (props.theme.isOpen ? "12rem" : "7rem")};
+    }
 `;
 
 const MenuIconContainer = styled.div`
@@ -38,28 +44,29 @@ const Status = styled.p`
     color: var(--color-purple-300);
 `;
 
-function TopSideBar({ onClick }) {
-    const { isOpen } = useTheme();
+function TopSideBar() {
+    const { isOpen, toggleSideBar } = useTheme();
+
     return (
         <StyledTopSideBar type="vertical">
             <MenuIconContainer>
                 {isOpen ? (
                     <HiXMark
-                        onClick={onClick}
+                        onClick={toggleSideBar}
                         size={30}
                         color="var(--color-purple-300)"
                     />
                 ) : (
                     <HiBars3
-                        onClick={onClick}
+                        onClick={toggleSideBar}
                         size={30}
                         color="var(--color-purple-300)"
                     />
                 )}
             </MenuIconContainer>
-            <NavLink to="profile/edit">
+            <RouteNavLink to={PROFILE_EDIT}>
                 <ProfileImage src={Profile} />
-            </NavLink>
+            </RouteNavLink>
             {isOpen && (
                 <>
                     <Name>جواد جوادی</Name>

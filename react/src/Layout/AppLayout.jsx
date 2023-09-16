@@ -1,8 +1,10 @@
+import { Outlet } from "react-router-dom";
+import { ThemeProvider, styled } from "styled-components";
+
 import Stats from "./Stats/Stats";
 import SideBar from "./SideBar/SideBar";
 import Row from "../ui/Row";
-import { styled } from "styled-components";
-import { Outlet } from "react-router-dom";
+import { useState } from "react";
 
 const StyledAppLayout = styled(Row)`
     align-items: center;
@@ -11,12 +13,28 @@ const StyledAppLayout = styled(Row)`
 `;
 
 function AppLayout() {
+    // TODO: i should try to find better solution
+    // for sharing "isOpen" and "toggleSideBar"
+    // MAYBE Redux... 🤔💭
+    const [isOpen, setIsOpen] = useState(false);
+
+    function toggleSideBar() {
+        setIsOpen((isOpen) => !isOpen);
+    }
+
     return (
-        <StyledAppLayout>
-            <Stats />
-            <Outlet />
-            <SideBar />
-        </StyledAppLayout>
+        <ThemeProvider
+            theme={{
+                isOpen,
+                toggleSideBar,
+            }}
+        >
+            <StyledAppLayout>
+                <Stats />
+                <Outlet />
+                <SideBar />
+            </StyledAppLayout>
+        </ThemeProvider>
     );
 }
 

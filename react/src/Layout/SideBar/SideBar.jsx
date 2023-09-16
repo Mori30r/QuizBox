@@ -1,5 +1,4 @@
-import { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 
 import { list1, list2 } from "../../data/SideBarLinks";
 
@@ -27,17 +26,14 @@ const StyledSideBar = styled(Row)`
 `;
 
 function SideBar() {
-    const [isOpen, setIsOpen] = useState(false);
     return (
-        <ThemeProvider theme={{ isOpen }}>
-            <StyledSideBar type="vertical">
-                <TopSideBar onClick={() => setIsOpen((open) => !open)} />
-                <Row type="vertical">
-                    <SideBarList list={list1} />
-                    <SideBarList list={list2} />
-                </Row>
-            </StyledSideBar>
-        </ThemeProvider>
+        <StyledSideBar type="vertical">
+            <TopSideBar />
+            <Row type="vertical">
+                <SideBarList list={list1} />
+                <SideBarList list={list2} />
+            </Row>
+        </StyledSideBar>
     );
 }
 

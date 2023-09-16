@@ -1,5 +1,4 @@
 import { HiOutlinePhoto, HiXMark } from "react-icons/hi2";
-import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 
@@ -8,10 +7,12 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 import Heading from "../ui/Heading";
 import SubHeading from "../ui/SubHeading";
+import RouteNavLink from "./../ui/RouteNavLink";
 import ProfileImage from "./../ui/ProfileImage";
 
-import Profile from "../assets/images/profile.png";
 import { breakPoint11 } from "../constants/breakpoints";
+import Profile from "../assets/images/profile.png";
+import { HOME_PAGE } from "./../constants/pagesAddress";
 
 const Main = styled.main`
     display: flex;
@@ -91,9 +92,9 @@ function ProfileEdit() {
     return (
         <Main>
             <Header role="header">
-                <NavLink to="/">
+                <RouteNavLink to={HOME_PAGE}>
                     <HiXMark size={30} color="var(--color-grey-0)" />
-                </NavLink>
+                </RouteNavLink>
                 <div>
                     <Heading type="white">تغییر پروفایل</Heading>
                     <SubHeading type="white">
