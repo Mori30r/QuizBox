@@ -3,7 +3,7 @@ import { breakPoint4 } from "../constants/breakpoints";
 
 const types = {
     primary: css`
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         background-color: var(--color-purple-200);
         color: var(--color-purple-0);
 

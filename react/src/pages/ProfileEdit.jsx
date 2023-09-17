@@ -104,23 +104,40 @@ function ProfileEdit() {
             </Header>
             <Form onSubmit={handleSubmit(HandleForm)}>
                 <Container>
-                    <Input register={{ ...register("lname") }}>
+                    <Input shape="normal" register={{ ...register("lname") }}>
                         نام خانوادگی
                     </Input>
-                    <Input register={{ ...register("fname") }}>نام</Input>
-                    <Input register={{ ...register("username") }} fullWidth>
+                    <Input shape="normal" register={{ ...register("fname") }}>
+                        نام
+                    </Input>
+                    <Input
+                        shape="normal"
+                        register={{ ...register("username") }}
+                        fullWidth
+                    >
                         نام کاربری
                     </Input>
-                    <Input register={{ ...register("major") }}>
+                    <Input shape="normal" register={{ ...register("major") }}>
                         رشته تحصیلی
                     </Input>
-                    <Input register={{ ...register("university") }}>
+                    <Input
+                        shape="normal"
+                        register={{ ...register("university") }}
+                    >
                         دانشگاه
                     </Input>
-                    <Input register={{ ...register("email") }} fullWidth>
+                    <Input
+                        shape="normal"
+                        register={{ ...register("email") }}
+                        fullWidth
+                    >
                         آدرس ایمیل
                     </Input>
-                    <Input register={{ ...register("phone") }} fullWidth>
+                    <Input
+                        shape="normal"
+                        register={{ ...register("phone") }}
+                        fullWidth
+                    >
                         شماره همراه
                     </Input>
                     <Button type="primary">اعمال تغییرات</Button>
