@@ -1,8 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHref } from "react-router-dom";
-import { useTheme } from "styled-components";
+
+import { toggleSideBar } from "../Layout/SideBar/SideBarSlice";
 
 function RouteNavLink({ children, to }) {
-    const { isOpen, toggleSideBar } = useTheme();
+    const { isOpen } = useSelector((store) => store.sideBar);
+    const dispatch = useDispatch();
+
     const currentAddress = useHref();
 
     function handleClick() {
@@ -10,7 +14,7 @@ function RouteNavLink({ children, to }) {
             currentAddress.split("/").join("") === to.split("/").join("");
 
         if (isCurrentAddress || !isOpen) return;
-        toggleSideBar();
+        dispatch(toggleSideBar());
     }
 
     return (
