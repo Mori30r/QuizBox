@@ -83,7 +83,7 @@ const IconContainer = styled.div`
 `;
 
 function ProfileEdit() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, control } = useForm();
 
     const HandleForm = (e) => {
         console.log(e);
@@ -107,6 +107,7 @@ function ProfileEdit() {
                     <Input
                         type="text"
                         shape="normal"
+                        control={control}
                         register={{ ...register("lname") }}
                     >
                         نام خانوادگی
@@ -114,6 +115,7 @@ function ProfileEdit() {
                     <Input
                         type="text"
                         shape="normal"
+                        control={control}
                         register={{ ...register("fname") }}
                     >
                         نام
@@ -121,6 +123,7 @@ function ProfileEdit() {
                     <Input
                         type="text"
                         shape="normal"
+                        control={control}
                         register={{ ...register("username") }}
                         fullWidth
                     >
@@ -129,6 +132,7 @@ function ProfileEdit() {
                     <Input
                         type="text"
                         shape="normal"
+                        control={control}
                         register={{ ...register("major") }}
                     >
                         رشته تحصیلی
@@ -136,6 +140,7 @@ function ProfileEdit() {
                     <Input
                         type="text"
                         shape="normal"
+                        control={control}
                         register={{ ...register("university") }}
                     >
                         دانشگاه
@@ -143,6 +148,7 @@ function ProfileEdit() {
                     <Input
                         type="text"
                         shape="normal"
+                        control={control}
                         register={{ ...register("email") }}
                         fullWidth
                     >
@@ -151,6 +157,7 @@ function ProfileEdit() {
                     <Input
                         type="text"
                         shape="normal"
+                        control={control}
                         register={{ ...register("phone") }}
                         fullWidth
                     >

@@ -1,38 +1,24 @@
 import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import BoyTyping from "../../assets/images/boy-typing.png";
-import Heading from "../../ui/Heading";
+import { Form, FormContainer, ImageContainer } from "./Auth.Elements";
 import SubHeading from "../../ui/SubHeading";
+import Heading from "../../ui/Heading";
+import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import Check from "../../ui/Check";
-import Button from "../../ui/Button";
+
+import BoyTyping from "../../assets/images/boy-typing.png";
 import { LOGIN_PAGE } from "../../constants/pagesAddress";
+import { signUpSchema } from "../../constants/dataPatterns";
 
 const Header = styled.header`
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
-`;
-
-export const FormContainer = styled.div`
-    height: 90dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 10rem;
-`;
-
-export const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-`;
-
-export const ImageContainer = styled.div`
-    position: relative;
 `;
 
 const Image = styled.img`
@@ -50,7 +36,9 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 function Signup() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, control } = useForm({
+        resolver: yupResolver(signUpSchema),
+    });
 
     function handleLogin(e) {
         console.log(e);
@@ -67,10 +55,13 @@ function Signup() {
                         </SubHeading>
                     </Header>
                     <Input
-                        register={{ ...register("username") }}
+                        register={{
+                            ...register("username"),
+                        }}
                         id="username"
                         shape="underline"
                         type="text"
+                        control={control}
                     >
                         نام کاربری
                     </Input>
@@ -79,14 +70,18 @@ function Signup() {
                         id="email"
                         shape="underline"
                         type="text"
+                        control={control}
                     >
                         آدرس ایمیل
                     </Input>
                     <Input
-                        register={{ ...register("password") }}
+                        register={{
+                            ...register("password"),
+                        }}
                         id="password"
                         shape="underline"
                         type="password"
+                        control={control}
                     >
                         رمز عبور
                     </Input>

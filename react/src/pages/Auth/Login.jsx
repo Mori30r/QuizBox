@@ -1,16 +1,19 @@
 import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import Girl from "../../assets/images/girl.png";
 import Heading from "../../ui/Heading";
 import SubHeading from "../../ui/SubHeading";
 import Input from "../../ui/Input";
 import Check from "../../ui/Check";
 import Row from "../../ui/Row";
 import Button from "../../ui/Button";
+import { Form, FormContainer, ImageContainer } from "./Auth.Elements";
+
+import Girl from "../../assets/images/girl.png";
 import { SIGNUP_PAGE } from "../../constants/pagesAddress";
-import { Form, FormContainer, ImageContainer } from "./Signup";
+import { loginSchema } from "../../constants/dataPatterns";
 
 const Header = styled.header`
     display: flex;
@@ -34,12 +37,13 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 function Login() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, control } = useForm({
+        resolver: yupResolver(loginSchema),
+    });
 
     function handleLogin(e) {
         console.log(e);
     }
-
     return (
         <>
             <FormContainer>
@@ -51,18 +55,24 @@ function Login() {
                         </SubHeading>
                     </Header>
                     <Input
-                        register={{ ...register("emailOrUsername") }}
-                        id="emailOrUsername"
+                        register={{
+                            ...register("username"),
+                        }}
+                        id="username"
                         shape="underline"
                         type="text"
+                        control={control}
                     >
-                        آدرس ایمیل یا نام کاربری
+                        نام کاربری
                     </Input>
                     <Input
-                        register={{ ...register("password") }}
+                        register={{
+                            ...register("password"),
+                        }}
                         id="password"
                         shape="underline"
                         type="password"
+                        control={control}
                     >
                         رمز عبور
                     </Input>
