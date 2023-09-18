@@ -1,11 +1,13 @@
-import { css, styled, useTheme } from "styled-components";
+import { css, styled } from "styled-components";
 import { HiBars3, HiXMark } from "react-icons/hi2";
+import { useDispatch, useSelector } from "react-redux";
 
 import ProfileImage from "../../ui/ProfileImage";
 import RouteNavLink from "../../ui/RouteNavLink";
+import { toggleSideBar } from "./SideBarSlice";
 
 import Profile from "../../assets/images/profile.png";
-import { PROFILE_EDIT } from "../../constants/pagesAddress";
+import { PROFILE_EDIT_PAGE } from "../../constants/pagesAddress";
 
 const StyledTopSideBar = styled.div`
     display: flex;
@@ -45,26 +47,27 @@ const Status = styled.p`
 `;
 
 function TopSideBar() {
-    const { isOpen, toggleSideBar } = useTheme();
+    const { isOpen } = useSelector((store) => store.sideBar);
+    const dispatch = useDispatch();
 
     return (
         <StyledTopSideBar type="vertical">
             <MenuIconContainer>
                 {isOpen ? (
                     <HiXMark
-                        onClick={toggleSideBar}
+                        onClick={() => dispatch(toggleSideBar())}
                         size={30}
                         color="var(--color-purple-300)"
                     />
                 ) : (
                     <HiBars3
-                        onClick={toggleSideBar}
+                        onClick={() => dispatch(toggleSideBar())}
                         size={30}
                         color="var(--color-purple-300)"
                     />
                 )}
             </MenuIconContainer>
-            <RouteNavLink to={PROFILE_EDIT}>
+            <RouteNavLink to={PROFILE_EDIT_PAGE}>
                 <ProfileImage src={Profile} />
             </RouteNavLink>
             {isOpen && (

@@ -83,7 +83,7 @@ const IconContainer = styled.div`
 `;
 
 function ProfileEdit() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, control } = useForm();
 
     const HandleForm = (e) => {
         console.log(e);
@@ -104,23 +104,63 @@ function ProfileEdit() {
             </Header>
             <Form onSubmit={handleSubmit(HandleForm)}>
                 <Container>
-                    <Input register={{ ...register("lname") }}>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        control={control}
+                        register={{ ...register("lname") }}
+                    >
                         نام خانوادگی
                     </Input>
-                    <Input register={{ ...register("fname") }}>نام</Input>
-                    <Input register={{ ...register("username") }} fullWidth>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        control={control}
+                        register={{ ...register("fname") }}
+                    >
+                        نام
+                    </Input>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        control={control}
+                        register={{ ...register("username") }}
+                        fullWidth
+                    >
                         نام کاربری
                     </Input>
-                    <Input register={{ ...register("major") }}>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        control={control}
+                        register={{ ...register("major") }}
+                    >
                         رشته تحصیلی
                     </Input>
-                    <Input register={{ ...register("university") }}>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        control={control}
+                        register={{ ...register("university") }}
+                    >
                         دانشگاه
                     </Input>
-                    <Input register={{ ...register("email") }} fullWidth>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        control={control}
+                        register={{ ...register("email") }}
+                        fullWidth
+                    >
                         آدرس ایمیل
                     </Input>
-                    <Input register={{ ...register("phone") }} fullWidth>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        control={control}
+                        register={{ ...register("phone") }}
+                        fullWidth
+                    >
                         شماره همراه
                     </Input>
                     <Button type="primary">اعمال تغییرات</Button>

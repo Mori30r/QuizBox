@@ -10,14 +10,21 @@
         "preview": "vite preview"
     },
     "dependencies": {
+<<<<<<< HEAD
         "npm": "^10.1.0",
+=======
+        "@hookform/resolvers": "^3.3.1",
+        "@reduxjs/toolkit": "^1.9.5",
+>>>>>>> 321f83171a161c20b5495e5c70f225a248437acd
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.46.1",
         "react-icons": "^4.10.1",
+        "react-redux": "^8.1.2",
         "react-router-dom": "^6.16.0",
         "styled-components": "^6.0.7",
-        "vazirmatn": "^33.0.3"
+        "vazirmatn": "^33.0.3",
+        "yup": "^1.2.0"
     },
     "devDependencies": {
         "@types/react": "^18.2.15",

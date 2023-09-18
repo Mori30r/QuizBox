@@ -3,14 +3,14 @@ import { breakPoint4 } from "../constants/breakpoints";
 
 const types = {
     primary: css`
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         background-color: var(--color-purple-200);
         color: var(--color-purple-0);
 
         &:hover {
-            background-color: var(--color-purple-0);
-            color: var(--color-purple-200);
-            border: 2px solid var(--color-purple-0);
+            background-color: var(--color-purple-400);
+            color: var(--color-purple-0);
+            border: 2px solid var(--color-purple-400);
         }
     `,
     outline: css`
