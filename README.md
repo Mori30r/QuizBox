@@ -13,58 +13,29 @@
 <h3>React</h3>
 
 ```
-1. cd react
-```
-
-```
-2. npm install
-```
-
-```
-3. npm run dev
+cd react
+npm install
+npm run dev
 ```
 
 <h3>ِDjango</h3>
 
 ```
-1. python -m venv env   # Create a virtual environment   
+python -m venv env
+source env/bin/activate  (LINUX/MAC)
+env\Scripts\activate     (WINDOWS)
+pip install -r requirements.txt
 ```
 
 ```
-2.
-source env/bin/activate    # Activate the virtual environment (for Linux/Mac)
-
-env\Scripts\activate    # Activate the virtual environment (for Windows)
-```
-
-```
-3. pip install -r requirements.txt
-```
-
-```
-4. cd django\
-```
-
-```
-5.
+cd django
 python manage.py makemigrations
 python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
 ```
 
 ```
-6. python manage.py createsuperuser
+Django URL: http://127.0.0.1:8000
+API Docs(Swagger): http://127.0.0.1:8000/api/schema/docs#/
 ```
-
-```
-7. python manage.py runserver
-```
-
-```
-The server will start locally, and you can access the project by visiting `http://127.0.0.1:8000:8000` in your web browser.
-```
-
-```
-API Docs swagger 
-`http://127.0.0.1:8000/api/schema/docs#/`
-```
-
