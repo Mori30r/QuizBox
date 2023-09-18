@@ -5,32 +5,22 @@ from rest_framework.response import Response
 from .serializers import TeacherSerializer, StudentSerializer, EnrollmentSerializer
 from .models import Student, Teacher, Enrollment, Course
 from rest_framework.permissions import IsAuthenticated
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiTypes
 
 
 
-
+@extend_schema(
+    request=StudentSerializer,  
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description='Create a student account.'
+)
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def create_account(request):
+def create_account_student(request):
     user = request.user
-
-    if user.role == 'Teacher':
-        teacher, created = Teacher.objects.get_or_create(user=user)
-
-        if created:
-            # Set additional attributes specific to the teacher
-            teacher.teaching_experience = request.data.get('teaching_experience')
-            teacher.teacher_code = request.data.get('teacher_code')
-            teacher.qualification = request.data.get('qualification')
-            teacher.specialization = request.data.get('specialization')
-            teacher.save()
-
-        teacher_serializer = TeacherSerializer(teacher)
-
-        if teacher_serializer.is_valid():
-            return Response({'message': 'Teacher account created successfully.'}, status=status.HTTP_201_CREATED)
-        else:
-            return Response(teacher_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if user.role == 'Student':
         student, created = Student.objects.get_or_create(user=user)
@@ -51,44 +41,96 @@ def create_account(request):
         if student_serializer.is_valid():
             return Response({'message': 'Student account created successfully.'}, status=status.HTTP_201_CREATED)
         else:
-            return Response(student_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(student_serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
-
-
-@api_view(['PUT'])
+@extend_schema(
+    request=TeacherSerializer,  
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description='Create a eacher account.'
+)
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def update_account(request):
+def create_account_teacher(request):
     user = request.user
 
     if user.role == 'Teacher':
         teacher, created = Teacher.objects.get_or_create(user=user)
 
-        if not created:
-            teacher_serializer = TeacherSerializer(teacher, data=request.data)
+        if created:
+            # Set additional attributes specific to the teacher
+            teacher.teaching_experience = request.data.get('teaching_experience')
+            teacher.teacher_code = request.data.get('teacher_code')
+            teacher.qualification = request.data.get('qualification')
+            teacher.specialization = request.data.get('specialization')
+            teacher.save()
 
-            if teacher_serializer.is_valid():
-                teacher_serializer.save()
-                return Response({'message': 'Teacher account updated successfully.'}, status=status.HTTP_200_OK)
-            else:
-                return Response(teacher_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        teacher_serializer = TeacherSerializer(teacher)
+
+        if teacher_serializer.is_valid():
+            return Response({'message': 'Teacher account created successfully.'}, status=status.HTTP_201_CREATED)
         else:
-            return Response({'message': 'Teacher account not found.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response(teacher_serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
-    if user.role == 'Student':
-        student, created = Student.objects.get_or_create(user=user)
+@extend_schema(
+    request=TeacherSerializer,  
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description='Create a teacher account.'
+)
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_account_teacher(request):
+    user = request.user
 
-        if not created:
-            student_serializer = StudentSerializer(student, data=request.data)
+    if user.role != 'Teacher':
+        return Response({'message': 'Invalid user role.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            if student_serializer.is_valid():
-                student_serializer.save()
-                return Response({'message': 'Student account updated successfully.'}, status=status.HTTP_200_OK)
-            else:
-                return Response(student_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    teacher, created = Teacher.objects.get_or_create(user=user)
+
+    if not created:
+        teacher_serializer = TeacherSerializer(teacher, data=request.data)
+
+        if teacher_serializer.is_valid():
+            teacher_serializer.save()
+            return Response({'message': 'Teacher account updated successfully.'}, status=status.HTTP_200_OK)
         else:
-            return Response({'message': 'Student account not found.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response(teacher_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response({'message': 'Teacher account not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-    return Response({'message': 'Invalid user role.'}, status=status.HTTP_400_BAD_REQUEST)
+@extend_schema(
+    request=StudentSerializer,  
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description='Create a student account.'
+)
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_account_student(request):
+    user = request.user
+
+    if user.role != 'Student':
+        return Response({'message': 'Invalid user role.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    student, created = Student.objects.get_or_create(user=user)
+
+    if not created:
+        student_serializer = StudentSerializer(student, data=request.data)
+
+        if student_serializer.is_valid():
+            student_serializer.save()
+            return Response({'message': 'Student account updated successfully.'}, status=status.HTTP_200_OK)
+        else:
+            return Response(student_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response({'message': 'Student account not found.'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
 @permission_classes([])
@@ -108,8 +150,6 @@ def teacher_details(request, teacher_id):
     return Response(teacher_data, status=status.HTTP_200_OK)
     
 
-
-
 @api_view(['GET'])
 @permission_classes([])
 def student_list(request):
@@ -119,7 +159,6 @@ def student_list(request):
         students_data = serializer.data
         return Response(students_data, status=status.HTTP_200_OK)
 
-
 @api_view(['GET'])
 def student_detail(request, student_id):
     student = get_object_or_404(Student, id=student_id)
@@ -127,9 +166,19 @@ def student_detail(request, student_id):
     student_data = serializer.data
     return Response(student_data, status=status.HTTP_200_OK)
 
-
-
-
+@extend_schema(
+    methods=['POST'],
+    request={
+        'student_id': OpenApiParameter(name='student_id', type=OpenApiTypes.INT, description='شناسه دانشجو'),
+        'teacher_id': OpenApiParameter(name='teacher_id', type=OpenApiTypes.INT, description='شناسه استاد'),
+        'course_id': OpenApiParameter(name='course_id', type=OpenApiTypes.INT, description='شناسه درس'),
+    },
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description='ارسال درخواست تایید ثبت نام دانشجو برای استاد و درس انتخاب شده'
+)
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def enroll_student(request):
@@ -173,8 +222,6 @@ def enroll_student(request):
     serialized_teachers = [{'id': teacher.id} for teacher in teachers]
     return Response({'teachers': serialized_teachers})
 
-
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_student_requests(request):
@@ -189,8 +236,19 @@ def list_student_requests(request):
 
     return Response({'enrollments': serialized_enrollments})
 
+@extend_schema(
+    methods=['POST'],
+    request={
+        'teacher_id': OpenApiParameter(name='teacher_id', type=OpenApiTypes.INT, description='شناسه استاد'),
+        'course_id': OpenApiParameter(name='course_id', type=OpenApiTypes.INT, description='شناسه درس'),
+    },
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description= 'تایید درخواست های دانشجو ها از طرف استاد با این  انجام میشود'
 
-
+)
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def approve_student_request(request, teacher_id, course_id):
@@ -235,8 +293,6 @@ def approve_student_request(request, teacher_id, course_id):
         
         return Response({'message': 'درخواست نامعتبر.'})
     
-    
-    
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_approved_students(request, teacher_id):
@@ -257,8 +313,6 @@ def list_approved_students(request, teacher_id):
         })
 
     return Response({'approved_students': approved_students})
-
-
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

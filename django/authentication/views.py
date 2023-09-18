@@ -9,9 +9,17 @@ from django.contrib.auth import authenticate
 from .renderers import UserRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 
-
+@extend_schema(
+    request=UserSerializer,  
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description='Create a eacher account.'
+)
 class SignUpView(APIView):
     serializer_class = UserSerializer
     permission_classes = []
@@ -58,7 +66,14 @@ class LoginView(APIView):
 
         return Response(data=content, status=status.HTTP_200_OK)
     
-
+@extend_schema(
+    request=UserChangePasswordSerializer,  
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description='Create a eacher account.'
+)
 class UserChangePasswordView(APIView):
   permission_classes = [IsAuthenticated]
   def post(self, request, format=None):
@@ -66,7 +81,14 @@ class UserChangePasswordView(APIView):
     serializer.is_valid(raise_exception=True)
     return Response({'msg':'Password Changed Successfully'}, status=status.HTTP_200_OK)
 
-
+@extend_schema(
+    request=SendPasswordResetEmailSerializer,  
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description='Create a eacher account.'
+)
 class SendPasswordResetEmailView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = []
@@ -75,7 +97,16 @@ class SendPasswordResetEmailView(APIView):
         serializer = SendPasswordResetEmailSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response({'msg':'Password Reset link send. Please check your Email'}, status=status.HTTP_200_OK)
-    
+
+
+@extend_schema(
+    request=UserPasswordResetSerializer,  
+    responses={
+        status.HTTP_201_CREATED: None,  
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+    },
+    description='Create a eacher account.'
+)
 class UserPasswordResetView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = []

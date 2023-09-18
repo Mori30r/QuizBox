@@ -1,0 +1,702 @@
+openapi: 3.0.3
+info:
+  title: API Quiz Box
+  version: 1.0.0
+paths:
+  /api/account/approve_student_request/{teacher_id}/courses/{course_id}/requests/:
+    get:
+      operationId: api_account_approve_student_request_courses_requests_retrieve
+      description: تایید درخواست های دانشجو ها از طرف استاد با این  انجام میشود
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: teacher_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: api_account_approve_student_request_courses_requests_create
+      description: تایید درخواست های دانشجو ها از طرف استاد با این  انجام میشود
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: teacher_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          teacher_id:
+            schema:
+              type: object
+              additionalProperties: {}
+              description: Unspecified request body
+          course_id:
+            schema:
+              type: object
+              additionalProperties: {}
+              description: Unspecified request body
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /api/account/create_account_student/:
+    post:
+      operationId: api_account_create_account_student_create
+      description: Create a student account.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudentRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /api/account/create_account_teacher/:
+    post:
+      operationId: api_account_create_account_teacher_create
+      description: Create a eacher account.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /api/account/enroll-student/:
+    get:
+      operationId: api_account_enroll_student_retrieve
+      description: ارسال درخواست تایید ثبت نام دانشجو برای استاد و درس انتخاب شده
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: api_account_enroll_student_create
+      description: ارسال درخواست تایید ثبت نام دانشجو برای استاد و درس انتخاب شده
+      tags:
+      - api
+      requestBody:
+        content:
+          student_id:
+            schema:
+              type: object
+              additionalProperties: {}
+              description: Unspecified request body
+          teacher_id:
+            schema:
+              type: object
+              additionalProperties: {}
+              description: Unspecified request body
+          course_id:
+            schema:
+              type: object
+              additionalProperties: {}
+              description: Unspecified request body
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /api/account/list_approved_students/{teacher_id}/approved_students/:
+    get:
+      operationId: api_account_list_approved_students_approved_students_retrieve
+      description: لیست دانشجوهایی که توسط استاد تایید شده‌اند را برمی‌گرداند.
+      parameters:
+      - in: path
+        name: teacher_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/account/list_approved_teachers_by_student/{student_id}/approved_teachers/:
+    get:
+      operationId: api_account_list_approved_teachers_by_student_approved_teachers_retrieve
+      description: لیست استادهایی که آن دانشجو را تایید کرده است را برمی‌گرداند.
+      parameters:
+      - in: path
+        name: student_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/account/list_student_requests/:
+    get:
+      operationId: api_account_list_student_requests_retrieve
+      description: لیست درخواست های دانشجو هارو توی یک لیست به استاد نمایش میده
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/account/student/{student_id}/:
+    get:
+      operationId: api_account_student_retrieve
+      parameters:
+      - in: path
+        name: student_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/account/student_list/:
+    get:
+      operationId: api_account_student_list_retrieve
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/account/teacher/{teacher_id}/:
+    get:
+      operationId: api_account_teacher_retrieve
+      parameters:
+      - in: path
+        name: teacher_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/account/teacher_list/:
+    get:
+      operationId: api_account_teacher_list_retrieve
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/account/update_account_student/:
+    put:
+      operationId: api_account_update_account_student_update
+      description: Create a student account.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudentRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /api/account/update_account_teacher/:
+    put:
+      operationId: api_account_update_account_teacher_update
+      description: Create a eacher account.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /api/auth/changepassword/:
+    post:
+      operationId: api_auth_changepassword_create
+      description: Create a eacher account.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserChangePasswordRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserChangePasswordRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserChangePasswordRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /api/auth/login/:
+    get:
+      operationId: api_auth_login_retrieve
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: api_auth_login_create
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/auth/reset-password/{uid}/{token}/:
+    post:
+      operationId: api_auth_reset_password_create
+      description: Create a eacher account.
+      parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: uid
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPasswordResetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserPasswordResetRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserPasswordResetRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /api/auth/send-reset-password-email/:
+    post:
+      operationId: api_auth_send_reset_password_email_create
+      description: Create a eacher account.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendPasswordResetEmailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendPasswordResetEmailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendPasswordResetEmailRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /api/auth/signup/:
+    post:
+      operationId: api_auth_signup_create
+      description: Create a eacher account.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+components:
+  schemas:
+    RoleEnum:
+      enum:
+      - Teacher
+      - Student
+      type: string
+      description: |-
+        * `Teacher` - Teacher
+        * `Student` - Student
+    SendPasswordResetEmailRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 255
+      required:
+      - email
+    StudentRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserRequest'
+        number_of_semesters:
+          type: integer
+        parent_name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        grade:
+          type: string
+          minLength: 1
+          maxLength: 50
+        student_code:
+          type: string
+          minLength: 1
+          maxLength: 10
+        parent_phone_number:
+          type: string
+          minLength: 1
+          maxLength: 12
+        major:
+          type: string
+          minLength: 1
+          title: رشته تحصیلی
+          maxLength: 80
+        enrollment_date:
+          type: string
+          format: date
+          title: تاریخ ورود دانشجو به دانشگاه
+        courses:
+          type: array
+          items:
+            type: integer
+      required:
+      - courses
+      - enrollment_date
+      - grade
+      - major
+      - parent_name
+      - parent_phone_number
+      - student_code
+      - user
+    TeacherRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserRequest'
+        course:
+          type: integer
+          nullable: true
+        teaching_experience:
+          type: integer
+        teacher_code:
+          type: string
+          minLength: 1
+          maxLength: 10
+        qualification:
+          type: string
+          minLength: 1
+          title: مدرک تحصیلی
+          maxLength: 60
+        specialization:
+          type: string
+          minLength: 1
+          title: رشته تدریس استاد
+          maxLength: 60
+      required:
+      - qualification
+      - specialization
+      - teacher_code
+      - teaching_experience
+      - user
+    UserChangePasswordRequest:
+      type: object
+      properties:
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+          maxLength: 255
+        password2:
+          type: string
+          writeOnly: true
+          minLength: 1
+          maxLength: 255
+      required:
+      - password
+      - password2
+    UserPasswordResetRequest:
+      type: object
+      properties:
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+          maxLength: 255
+        password2:
+          type: string
+          writeOnly: true
+          minLength: 1
+          maxLength: 255
+      required:
+      - password
+      - password2
+    UserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        password2:
+          type: string
+          writeOnly: true
+          minLength: 1
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        date_of_birth:
+          type: string
+          format: date
+        phone_number:
+          type: string
+          minLength: 1
+          maxLength: 12
+      required:
+      - role
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
