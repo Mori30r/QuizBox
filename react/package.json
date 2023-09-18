@@ -10,12 +10,10 @@
         "preview": "vite preview"
     },
     "dependencies": {
-<<<<<<< HEAD
+
         "npm": "^10.1.0",
-=======
         "@hookform/resolvers": "^3.3.1",
         "@reduxjs/toolkit": "^1.9.5",
->>>>>>> 321f83171a161c20b5495e5c70f225a248437acd
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.46.1",
