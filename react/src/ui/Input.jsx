@@ -13,9 +13,7 @@ const InputContainer = styled.div`
 
 const labelTypes = {
     underline: css`
-        font-size: 1.2rem;
         display: none;
-        color: var(--color-grey-300);
     `,
     normal: css`
         font-size: 1.5rem;

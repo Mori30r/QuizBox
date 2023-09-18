@@ -104,29 +104,44 @@ function ProfileEdit() {
             </Header>
             <Form onSubmit={handleSubmit(HandleForm)}>
                 <Container>
-                    <Input shape="normal" register={{ ...register("lname") }}>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        register={{ ...register("lname") }}
+                    >
                         نام خانوادگی
                     </Input>
-                    <Input shape="normal" register={{ ...register("fname") }}>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        register={{ ...register("fname") }}
+                    >
                         نام
                     </Input>
                     <Input
+                        type="text"
                         shape="normal"
                         register={{ ...register("username") }}
                         fullWidth
                     >
                         نام کاربری
                     </Input>
-                    <Input shape="normal" register={{ ...register("major") }}>
+                    <Input
+                        type="text"
+                        shape="normal"
+                        register={{ ...register("major") }}
+                    >
                         رشته تحصیلی
                     </Input>
                     <Input
+                        type="text"
                         shape="normal"
                         register={{ ...register("university") }}
                     >
                         دانشگاه
                     </Input>
                     <Input
+                        type="text"
                         shape="normal"
                         register={{ ...register("email") }}
                         fullWidth
@@ -134,6 +149,7 @@ function ProfileEdit() {
                         آدرس ایمیل
                     </Input>
                     <Input
+                        type="text"
                         shape="normal"
                         register={{ ...register("phone") }}
                         fullWidth

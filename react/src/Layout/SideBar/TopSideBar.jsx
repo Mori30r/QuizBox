@@ -5,7 +5,7 @@ import ProfileImage from "../../ui/ProfileImage";
 import RouteNavLink from "../../ui/RouteNavLink";
 
 import Profile from "../../assets/images/profile.png";
-import { PROFILE_EDIT } from "../../constants/pagesAddress";
+import { PROFILE_EDIT_PAGE } from "../../constants/pagesAddress";
 
 const StyledTopSideBar = styled.div`
     display: flex;
@@ -64,7 +64,7 @@ function TopSideBar() {
                     />
                 )}
             </MenuIconContainer>
-            <RouteNavLink to={PROFILE_EDIT}>
+            <RouteNavLink to={PROFILE_EDIT_PAGE}>
                 <ProfileImage src={Profile} />
             </RouteNavLink>
             {isOpen && (

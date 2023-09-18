@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-const StyledSubHeading = styled.p`
+const StyledSubHeading = styled.span`
     font-size: 1.3rem;
     font-weight: 500;
     color: ${(props) =>
@@ -8,12 +8,8 @@ const StyledSubHeading = styled.p`
             : "var(--color-grey-300)"};
 `;
 
-function SubHeading({ children, type, role }) {
-    return (
-        <StyledSubHeading role={role} type={type}>
-            {children}
-        </StyledSubHeading>
-    );
+function SubHeading({ children, type }) {
+    return <StyledSubHeading type={type}>{children}</StyledSubHeading>;
 }
 
 export default SubHeading;
