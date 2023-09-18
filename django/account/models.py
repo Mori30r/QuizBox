@@ -12,7 +12,8 @@ class Teacher(models.Model):
     specialization = models.CharField(max_length=60, verbose_name="رشته تدریس استاد")
     teacher_groups = models.ManyToManyField(Group, blank=True, related_name='teachers')
     teacher_user_permissions = models.ManyToManyField(Permission, blank=True, related_name='teachers')
-    course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='courses', null=True)    
+    course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='courses', null=True)
+    courses = models.ManyToManyField('Course', blank=True, related_name='teachers')    
     class Meta:
         verbose_name = 'Teacher'
         verbose_name_plural = 'Teachers'

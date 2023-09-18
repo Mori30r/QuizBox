@@ -334,3 +334,23 @@ def list_approved_teachers_by_student(request, student_id):
         })
 
     return Response({'approved_teachers': approved_teachers})
+
+@api_view(['POST'])
+def create_course(request, teacher_id):
+    
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    
+    course_data = request.data.get('course_name', None)  # Assuming the course data is provided in the request
+    
+    if not course_data:
+        return Response({'error': 'Course data is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        # Create a new course instance
+        course = Course.objects.create(name=course_data['course_name'])
+        # Add the course to the teacher's courses
+        teacher.courses.add(course)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    return Response({'message': 'Course learned successfully.', 'course_id': course.id}, status=status.HTTP_201_CREATED)
