@@ -68,7 +68,7 @@ const GlobalStyles = styled.createGlobalStyle`
         }
 
         @media screen and (${breakPoint5}) {
-            font-size: 55%;
+            font-size: 57%;
         }
     }
 

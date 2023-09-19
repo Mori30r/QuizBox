@@ -1,9 +1,15 @@
 import { Outlet } from "react-router-dom";
 import { styled } from "styled-components";
+import { breakPoint8 } from "../constants/breakpoints";
 
 const Container = styled.div`
-    display: grid;
     grid-template-columns: 1fr 1fr;
+    display: grid;
+
+    @media screen and (${breakPoint8}) {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
 `;
 
 function Auth() {
@@ -23,6 +29,10 @@ const TopSvg = styled.svg`
     top: 0;
     left: 0;
     z-index: -1;
+
+    @media screen and (${breakPoint8}) {
+        display: none;
+    }
 `;
 
 function WaveTop() {
@@ -41,6 +51,10 @@ const BottomSvg = styled.svg`
     bottom: 0;
     left: 0;
     z-index: -1;
+
+    @media screen and (${breakPoint8}) {
+        display: none;
+    }
 `;
 
 function WaveBottom() {
