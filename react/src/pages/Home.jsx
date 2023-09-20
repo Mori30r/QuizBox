@@ -14,14 +14,14 @@ const StyledMain = styled(Row)`
     overflow-y: auto;
     background-color: var(--color-purple-100);
     border-radius: 6px;
-    padding: 4rem 6rem;
+    padding: 4rem;
     box-shadow: 0 0 1rem var(--color-grey-400);
     margin: 0 2rem;
     flex: 1;
 
     @media screen and (${breakPoint12}) {
         margin: 0;
-        padding: 3rem 1.5rem;
+        padding: 4rem;
     }
 `;
 

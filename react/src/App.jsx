@@ -20,6 +20,7 @@ const DevelopementRouting = styled.div`
     margin: 1rem;
     padding: 1rem;
     background-color: var(--color-purple-400);
+    z-index: 2;
 
     & a {
         font-size: 1.5rem;

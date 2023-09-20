@@ -26,7 +26,6 @@ const Image = styled.img`
     z-index: 1;
     top: 35dvh;
     left: 10rem;
-    width: 60rem;
 `;
 
 const StyledNavLink = styled(NavLink)`
