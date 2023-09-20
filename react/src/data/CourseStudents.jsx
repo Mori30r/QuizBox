@@ -14,4 +14,7 @@ export const studentList = [
     {
         name: "گیسو مظفری",
     },
+    {
+        name: "زهرا خادمی",
+    },
 ];

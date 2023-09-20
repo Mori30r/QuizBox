@@ -15,6 +15,7 @@ const StyledTag = styled.span`
     font-weight: 1000;
     padding: 0.5rem 1rem;
     border-radius: 6px;
+    direction: rtl;
 `;
 
 function Tag({ children, type }) {
