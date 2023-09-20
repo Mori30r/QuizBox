@@ -1,20 +1,17 @@
-import { HiOutlinePhoto, HiXMark } from "react-icons/hi2";
+import { HiOutlinePhoto } from "react-icons/hi2";
 import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 
-import Row from "./../ui/Row";
-import Button from "../ui/Button";
 import Input from "../ui/Input";
+import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 import SubHeading from "../ui/SubHeading";
 import MainSection from "./../ui/MainSection";
-import RouteNavLink from "./../ui/RouteNavLink";
 import ProfileImage from "./../ui/ProfileImage";
+import HeaderWithBack from "../ui/HeaderWithBack";
 
 import Profile from "../assets/images/profile.png";
 import { breakPoint11 } from "../constants/breakpoints";
-import { HOME_PAGE } from "./../constants/pagesAddress";
-import Header from "../ui/Header";
 
 const Form = styled.form`
     display: grid;
@@ -68,17 +65,12 @@ function ProfileEdit() {
 
     return (
         <MainSection type="vertical">
-            <Header>
-                <RouteNavLink to={HOME_PAGE}>
-                    <HiXMark size={30} color="var(--color-grey-0)" />
-                </RouteNavLink>
-                <div>
-                    <Heading type="white">تغییر پروفایل</Heading>
-                    <SubHeading type="white">
-                        اطلاعات شخصی و عکس خودت رو به روزرسانی کن
-                    </SubHeading>
-                </div>
-            </Header>
+            <HeaderWithBack>
+                <Heading type="white">تغییر پروفایل</Heading>
+                <SubHeading type="white">
+                    اطلاعات شخصی و عکس خودت رو به روزرسانی کن
+                </SubHeading>
+            </HeaderWithBack>
             <Form onSubmit={handleSubmit(HandleForm)}>
                 <Container>
                     <Input

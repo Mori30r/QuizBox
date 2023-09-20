@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import { createBrowserRouter } from "react-router-dom";
 import ProfileEdit from "../pages/ProfileEdit";
 import {
+    COURSE_PAGE,
     HOME_PAGE,
     LOGIN_PAGE,
     PROFILE_EDIT_PAGE,
@@ -11,6 +12,7 @@ import {
 import Auth from "../Layout/Auth";
 import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
+import Course from "../pages/Course";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +23,10 @@ export const router = createBrowserRouter([
                 index: true,
                 path: HOME_PAGE,
                 element: <Home />,
+            },
+            {
+                path: COURSE_PAGE,
+                element: <Course />,
             },
             {
                 path: PROFILE_EDIT_PAGE,

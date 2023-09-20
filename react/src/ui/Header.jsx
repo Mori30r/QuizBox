@@ -1,17 +1,13 @@
 import { styled } from "styled-components";
-import Row from "./Row";
-import { breakPoint11 } from "../constants/breakpoints";
 
-const StyledHeader = styled(Row)`
-    margin: 3rem 0;
-
-    @media screen and (${breakPoint11}) {
-        margin-bottom: 2rem;
-    }
+const StyledHeader = styled.div`
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: ${(props) => (props.$one ? "flex-end" : "space-between")};
 `;
 
-function Header({ children }) {
-    return <StyledHeader>{children}</StyledHeader>;
+function Header({ children, one }) {
+    return <StyledHeader $one={one}>{children}</StyledHeader>;
 }
 
 export default Header;
