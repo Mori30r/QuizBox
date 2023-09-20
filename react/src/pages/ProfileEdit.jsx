@@ -7,38 +7,15 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 import Heading from "../ui/Heading";
 import SubHeading from "../ui/SubHeading";
+import MainSection from "./../ui/MainSection";
 import RouteNavLink from "./../ui/RouteNavLink";
 import ProfileImage from "./../ui/ProfileImage";
 
-import { breakPoint11 } from "../constants/breakpoints";
 import Profile from "../assets/images/profile.png";
+import { breakPoint11 } from "../constants/breakpoints";
 import { HOME_PAGE } from "./../constants/pagesAddress";
+import Header from "../ui/Header";
 
-const Main = styled.main`
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    height: 100%;
-    padding: 4rem 6rem;
-    background-color: var(--color-purple-100);
-    border-radius: 6px;
-    overflow-y: auto;
-    box-shadow: 0 0 1rem var(--color-grey-400);
-    margin: 0 2rem;
-
-    @media screen and (${breakPoint11}) {
-        margin: 0;
-        padding: 4rem;
-    }
-`;
-
-const Header = styled(Row)`
-    margin-bottom: 3rem;
-
-    @media screen and (${breakPoint11}) {
-        margin-bottom: 2rem;
-    }
-`;
 const Form = styled.form`
     display: grid;
     grid-template-columns: 10fr 1fr;
@@ -90,8 +67,8 @@ function ProfileEdit() {
     };
 
     return (
-        <Main>
-            <Header role="header">
+        <MainSection type="vertical">
+            <Header>
                 <RouteNavLink to={HOME_PAGE}>
                     <HiXMark size={30} color="var(--color-grey-0)" />
                 </RouteNavLink>
@@ -175,7 +152,7 @@ function ProfileEdit() {
                     </IconContainer>
                 </ImageContainer>
             </Form>
-        </Main>
+        </MainSection>
     );
 }
 

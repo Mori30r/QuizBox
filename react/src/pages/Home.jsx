@@ -1,53 +1,21 @@
-import { styled } from "styled-components";
-
-import Row from "../ui/Row";
 import Card from "../ui/Card";
 import Button from "../ui/Button";
+import Header from "./../ui/Header";
 import Heading from "./../ui/Heading";
 import SearchBox from "../ui/SearchBar";
+import MainSection from "../ui/MainSection";
+import CardsContainer from "./../ui/CardsContainer";
 import NotificationIcon from "../ui/NotificationIcon";
 
 import Boy from "../assets/images/boy.png";
-import { breakPoint12, breakPoint8 } from "../constants/breakpoints";
-
-const StyledMain = styled(Row)`
-    overflow-y: auto;
-    background-color: var(--color-purple-100);
-    border-radius: 6px;
-    padding: 4rem;
-    box-shadow: 0 0 1rem var(--color-grey-400);
-    margin: 0 2rem;
-    flex: 1;
-
-    @media screen and (${breakPoint12}) {
-        margin: 0;
-        padding: 4rem;
-    }
-`;
-
-const MainHeader = styled(Row)`
-    margin: 2rem 0;
-`;
-
-const CardsContainer = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2rem;
-    justify-items: center;
-
-    @media screen and (${breakPoint8}) {
-        grid-template-columns: 1fr;
-        row-gap: 2rem;
-    }
-`;
 
 function Home() {
     return (
-        <StyledMain type="vertical">
-            <MainHeader>
+        <MainSection type="vertical">
+            <Header>
                 <NotificationIcon />
                 <SearchBox />
-            </MainHeader>
+            </Header>
             <Card type="big" color="purple">
                 <Card.Image image={Boy} />
                 <Card.Hint>! به عنوان روح وارد کوئیز شو</Card.Hint>
@@ -55,10 +23,10 @@ function Home() {
                 <Card.Button>ورود به کوئیز</Card.Button>
                 <Card.Date>تا ساعت 12:30</Card.Date>
             </Card>
-            <MainHeader>
+            <Header>
                 <Button type="primary">مشاهده همه</Button>
                 <Heading type="white">درس های من</Heading>
-            </MainHeader>
+            </Header>
             <CardsContainer>
                 <Card color="green" type="small">
                     <Card.Hint>! پروژه رو یادت نره</Card.Hint>
@@ -74,7 +42,7 @@ function Home() {
                     <Card.Button>ورود به درس</Card.Button>
                 </Card>
             </CardsContainer>
-        </StyledMain>
+        </MainSection>
     );
 }
 

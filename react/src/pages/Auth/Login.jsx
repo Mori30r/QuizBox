@@ -15,13 +15,6 @@ import Girl from "../../assets/images/girl.png";
 import { SIGNUP_PAGE } from "../../constants/pagesAddress";
 import { loginSchema } from "../../constants/dataPatterns";
 
-const Header = styled.header`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2rem;
-`;
-
 const Image = styled.img`
     position: absolute;
     z-index: 1;
@@ -48,12 +41,8 @@ function Login() {
         <>
             <FormContainer>
                 <Form onSubmit={handleSubmit(handleLogin)}>
-                    <Header>
-                        <Heading>! خوش اومدی</Heading>
-                        <SubHeading>
-                            اطلاعات ورود به حسابت رو وارد کن
-                        </SubHeading>
-                    </Header>
+                    <Heading>! خوش اومدی</Heading>
+                    <SubHeading>اطلاعات ورود به حسابت رو وارد کن</SubHeading>
                     <Input
                         register={{
                             ...register("username"),
