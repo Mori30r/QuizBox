@@ -4,11 +4,13 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import { styled } from "styled-components";
 import {
+    COURSE_PAGE,
     HOME_PAGE,
     LOGIN_PAGE,
     PROFILE_EDIT_PAGE,
     SIGNUP_PAGE,
 } from "./constants/pagesAddress";
+import SubHeading from "./ui/SubHeading";
 
 const DevelopementRouting = styled.div`
     position: absolute;
@@ -20,6 +22,7 @@ const DevelopementRouting = styled.div`
     margin: 1rem;
     padding: 1rem;
     background-color: var(--color-purple-400);
+    z-index: 2;
 
     & a {
         font-size: 1.5rem;
@@ -33,7 +36,9 @@ function App() {
         <Provider store={store}>
             <RouterProvider router={router} />;
             <DevelopementRouting>
+                <SubHeading type="white">FOR DEVELOPEMENT</SubHeading>
                 <a href={HOME_PAGE}>صفحه اصلی</a>
+                <a href={COURSE_PAGE}>صفحه جزئیات درس</a>
                 <a href={PROFILE_EDIT_PAGE}>صفحه ویرایش پروفایل</a>
                 <a href={SIGNUP_PAGE}>صفحه ثبت نام</a>
                 <a href={LOGIN_PAGE}>صفحه ورود</a>

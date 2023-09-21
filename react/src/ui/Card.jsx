@@ -15,6 +15,7 @@ const StyledCard = styled.div`
     grid-template-rows: 5rem 1fr 1fr;
     position: relative;
     align-self: center;
+    margin-bottom: 2rem;
     box-shadow: ${(props) => `0 0 1rem var(--color-${props.theme.color}-200)`};
     background: ${(props) =>
         `linear-gradient(
@@ -25,28 +26,27 @@ const StyledCard = styled.div`
     ${(props) =>
         props.theme.type === "small" &&
         css`
-            height: 27rem;
+            height: 25rem;
             width: 80%;
             justify-content: space-between;
             padding: 2rem;
             @media screen and (${breakPoint6}) {
-                width: 70%;
                 height: 24rem;
             }
 
             @media screen and (${breakPoint12}) {
                 width: 100%;
+                height: 20rem;
             }
         `}
     ${(props) =>
         props.theme.type === "big" &&
         css`
-            height: 30rem;
+            height: 25rem;
             padding: 2rem 4rem;
             width: 80%;
             @media screen and (${breakPoint5}) {
-                width: 90%;
-                height: 30rem;
+                width: 80%;
             }
 
             @media screen and (${breakPoint12}) {
@@ -66,17 +66,17 @@ function Card({ type, color, children }) {
 
 const StyledImage = styled.img`
     position: absolute;
-    height: 90%;
-    top: -7rem;
+    height: 100%;
+    top: -10rem;
     left: -2rem;
 
     @media screen and (${breakPoint1}) {
-        top: -5rem;
+        top: -9rem;
         left: -3rem;
     }
 
     @media screen and (${breakPoint5}) {
-        top: -7rem;
+        top: -8rem;
     }
 
     @media screen and (${breakPoint9}) {
@@ -126,6 +126,10 @@ const StyledTitle = styled.p`
         font-size: ${(props) =>
             props.theme.type === "big" ? "3.5rem" : "2.3rem"};
     }
+
+    @media screen and (${breakPoint12}) {
+        grid-column: 1 / 3;
+    }
 `;
 
 function Title({ children }) {
@@ -138,7 +142,7 @@ const StyledDate = styled.span`
     text-decoration: underline dotted;
     grid-column: 2 / 3;
     grid-row: 3 / 4;
-    align-self: center;
+    align-self: flex-end;
     justify-self: flex-end;
 `;
 
@@ -160,6 +164,10 @@ const CapacityNumber = styled.p`
     font-size: 3rem;
     font-weight: 1000;
     padding: 3rem;
+
+    @media screen and (${breakPoint12}) {
+        padding: 2rem;
+    }
 `;
 
 function Capacity({ children }) {
@@ -179,9 +187,9 @@ function Capacity({ children }) {
 }
 
 const ButtonContainer = styled.div`
-    grid-column: 1/2;
+    grid-column: 1/3;
     grid-row: 3 / 4;
-    align-self: center;
+    align-self: flex-end;
     justify-self: flex-start;
 `;
 

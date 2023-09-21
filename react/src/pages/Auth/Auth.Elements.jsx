@@ -2,17 +2,17 @@ import { styled } from "styled-components";
 import { breakPoint8 } from "../../constants/breakpoints";
 
 export const FormContainer = styled.div`
-    height: 90dvh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 10rem;
     max-width: 70rem;
+    font-feature-settings: normal;
 
     @media screen and (${breakPoint8}) {
         padding: 5rem;
         width: 100%;
-        /* align-items: center; */
     }
 `;
 

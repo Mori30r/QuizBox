@@ -14,19 +14,11 @@ import BoyTyping from "../../assets/images/boy-typing.png";
 import { LOGIN_PAGE } from "../../constants/pagesAddress";
 import { signUpSchema } from "../../constants/dataPatterns";
 
-const Header = styled.header`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2rem;
-`;
-
 const Image = styled.img`
     position: absolute;
     z-index: 1;
     top: 35dvh;
     left: 10rem;
-    width: 60rem;
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -49,12 +41,10 @@ function Signup() {
         <>
             <FormContainer>
                 <Form onSubmit={handleSubmit(handleLogin)}>
-                    <Header>
-                        <Heading>! اکانت جدید بساز</Heading>
-                        <SubHeading>
-                            اطلاعاتت رو برای ساخت حساب جدید وارد کن
-                        </SubHeading>
-                    </Header>
+                    <Heading>! اکانت جدید بساز</Heading>
+                    <SubHeading>
+                        اطلاعاتت رو برای ساخت حساب جدید وارد کن
+                    </SubHeading>
                     <Input
                         register={{
                             ...register("username"),

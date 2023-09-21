@@ -1,44 +1,18 @@
-import { HiOutlinePhoto, HiXMark } from "react-icons/hi2";
+import { HiOutlinePhoto } from "react-icons/hi2";
 import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 
-import Row from "./../ui/Row";
-import Button from "../ui/Button";
 import Input from "../ui/Input";
+import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 import SubHeading from "../ui/SubHeading";
-import RouteNavLink from "./../ui/RouteNavLink";
+import MainSection from "./../ui/MainSection";
 import ProfileImage from "./../ui/ProfileImage";
+import HeaderWithBack from "../ui/HeaderWithBack";
 
-import { breakPoint11 } from "../constants/breakpoints";
 import Profile from "../assets/images/profile.png";
-import { HOME_PAGE } from "./../constants/pagesAddress";
+import { breakPoint11 } from "../constants/breakpoints";
 
-const Main = styled.main`
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    height: 100%;
-    padding: 4rem 6rem;
-    background-color: var(--color-purple-100);
-    border-radius: 6px;
-    overflow-y: auto;
-    box-shadow: 0 0 1rem var(--color-grey-400);
-    margin: 0 2rem;
-
-    @media screen and (${breakPoint11}) {
-        margin: 0;
-        padding: 4rem;
-    }
-`;
-
-const Header = styled(Row)`
-    margin-bottom: 3rem;
-
-    @media screen and (${breakPoint11}) {
-        margin-bottom: 2rem;
-    }
-`;
 const Form = styled.form`
     display: grid;
     grid-template-columns: 10fr 1fr;
@@ -90,18 +64,13 @@ function ProfileEdit() {
     };
 
     return (
-        <Main>
-            <Header role="header">
-                <RouteNavLink to={HOME_PAGE}>
-                    <HiXMark size={30} color="var(--color-grey-0)" />
-                </RouteNavLink>
-                <div>
-                    <Heading type="white">تغییر پروفایل</Heading>
-                    <SubHeading type="white">
-                        اطلاعات شخصی و عکس خودت رو به روزرسانی کن
-                    </SubHeading>
-                </div>
-            </Header>
+        <MainSection type="vertical">
+            <HeaderWithBack>
+                <Heading type="white">تغییر پروفایل</Heading>
+                <SubHeading type="white">
+                    اطلاعات شخصی و عکس خودت رو به روزرسانی کن
+                </SubHeading>
+            </HeaderWithBack>
             <Form onSubmit={handleSubmit(HandleForm)}>
                 <Container>
                     <Input
@@ -175,7 +144,7 @@ function ProfileEdit() {
                     </IconContainer>
                 </ImageContainer>
             </Form>
-        </Main>
+        </MainSection>
     );
 }
 
