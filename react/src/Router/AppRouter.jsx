@@ -1,7 +1,13 @@
-import AppLayout from "../Layout/AppLayout";
-import Home from "../pages/Home";
 import { createBrowserRouter } from "react-router-dom";
-import ProfileEdit from "../pages/ProfileEdit";
+
+import Home from "../pages/home/Home";
+import Auth from "../pages/auth/Auth";
+import Login from "../pages/auth/Login";
+import Signup from "../pages/auth/Signup";
+import AppLayout from "../Layout/AppLayout";
+import Course from "../pages/course/Course";
+import ProfileEdit from "../pages/profileEdit/ProfileEdit";
+
 import {
     COURSE_PAGE,
     HOME_PAGE,
@@ -9,10 +15,6 @@ import {
     PROFILE_EDIT_PAGE,
     SIGNUP_PAGE,
 } from "./../constants/pagesAddress";
-import Auth from "../Layout/Auth";
-import Login from "../pages/Auth/Login";
-import Signup from "../pages/Auth/Signup";
-import Course from "../pages/Course";
 
 export const router = createBrowserRouter([
     {

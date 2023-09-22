@@ -2,16 +2,16 @@ import { HiOutlinePhoto } from "react-icons/hi2";
 import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 
-import Input from "../ui/Input";
-import Button from "../ui/Button";
-import Heading from "../ui/Heading";
-import SubHeading from "../ui/SubHeading";
-import MainSection from "./../ui/MainSection";
-import ProfileImage from "./../ui/ProfileImage";
-import HeaderWithBack from "../ui/HeaderWithBack";
+import Input from "../../ui/Input";
+import Button from "../../ui/Button";
+import Heading from "../../ui/Heading";
+import SubHeading from "../../ui/SubHeading";
+import MainSection from "../../ui/MainSection";
+import ProfileImage from "../../ui/ProfileImage";
+import HeaderWithBack from "../../ui/HeaderWithBack";
 
-import Profile from "../assets/images/profile.png";
-import { breakPoint11 } from "../constants/breakpoints";
+import Profile from "../../assets/images/profile.png";
+import { breakPoint11 } from "../../constants/breakpoints";
 
 const Form = styled.form`
     display: grid;

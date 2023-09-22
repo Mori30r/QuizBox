@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { styled } from "styled-components";
-import { breakPoint8 } from "../constants/breakpoints";
+import { breakPoint8 } from "../../constants/breakpoints";
 
 const Container = styled.div`
     grid-template-columns: 1fr 1fr;

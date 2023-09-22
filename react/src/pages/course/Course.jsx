@@ -1,20 +1,20 @@
 import { styled } from "styled-components";
 
-import Row from "../ui/Row";
-import Card from "../ui/Card";
-import Table from "../ui/Table";
-import Header from "../ui/Header";
-import Heading from "./../ui/Heading";
-import SubHeading from "./../ui/SubHeading";
-import MainSection from "./../ui/MainSection";
-import HeaderWithBack from "./../ui/HeaderWithBack";
+import Row from "../../ui/Row";
+import Card from "../../ui/Card";
+import Table from "../../ui/Table";
+import Header from "../../ui/Header";
+import Heading from "../../ui/Heading";
+import SubHeading from "../../ui/SubHeading";
+import MainSection from "../../ui/MainSection";
+import HeaderWithBack from "../../ui/HeaderWithBack";
 
-import GirlWriting from "../assets/images/girl-writing.png";
-import { studentList } from "./../data/CourseStudents";
-import { list } from "../data/CourseProjects";
-import ProfileImage from "./../ui/ProfileImage";
-import Profile from "./../assets/images/profile.png";
-import Button from "../ui/Button";
+import GirlWriting from "../../assets/images/girl-writing.png";
+import { studentList } from "../../data/CourseStudents";
+import { list } from "../../data/CourseProjects";
+import ProfileImage from "../../ui/ProfileImage";
+import Profile from "../../assets/images/profile.png";
+import Button from "../../ui/Button";
 
 function Course() {
     return (

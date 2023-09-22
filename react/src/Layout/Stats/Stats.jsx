@@ -1,11 +1,12 @@
 import { styled } from "styled-components";
+
 import Row from "../../ui/Row";
-import QuizBoxList from "./Calender/QuizBoxList";
 import Select from "../../ui/Select";
 import Button from "../../ui/Button";
-import ProgressList from "./ProgressList/ProgressList";
 import Heading from "../../ui/Heading";
 import SubHeading from "./../../ui/SubHeading";
+import ProgressList from "./ProgressList/ProgressList";
+import CalenderBoxList from "./Calender/CalenderBoxList";
 import {
     breakPoint6,
     breakPoint7,
@@ -51,6 +52,7 @@ const CalenderBox = styled(Row)`
         display: none;
     }
 `;
+
 const ProgressBox = styled(Row)`
     height: 40%;
     background-color: var(--color-purple-0);
@@ -77,7 +79,7 @@ function Stats() {
                         <SubHeading>شانزدهم شهریور 1402</SubHeading>
                     </div>
                 </StatsBoxHeader>
-                <QuizBoxList />
+                <CalenderBoxList />
             </CalenderBox>
             <ProgressBox type="vertical">
                 <StatsBoxHeader>

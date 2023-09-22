@@ -1,4 +1,4 @@
-import QuizBox from "./QuizBox";
+import CalenderBox from "./CalenderBox";
 import { list } from "../../../data/StatsQuizBoxLinks";
 
 function QuizBoxList() {
@@ -7,7 +7,7 @@ function QuizBoxList() {
     return (
         <div>
             {quizList.map((quiz, id) => (
-                <QuizBox quiz={quiz} key={id} />
+                <CalenderBox quiz={quiz} key={id} />
             ))}
             ;
         </div>

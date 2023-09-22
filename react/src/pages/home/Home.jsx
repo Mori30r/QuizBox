@@ -1,13 +1,13 @@
-import Card from "../ui/Card";
-import Button from "../ui/Button";
-import Header from "./../ui/Header";
-import Heading from "./../ui/Heading";
-import SearchBox from "../ui/SearchBar";
-import MainSection from "../ui/MainSection";
-import CardsContainer from "./../ui/CardsContainer";
-import NotificationIcon from "../ui/NotificationIcon";
+import Card from "../../ui/Card";
+import Button from "../../ui/Button";
+import Header from "../../ui/Header";
+import Heading from "../../ui/Heading";
+import SearchBox from "../../ui/SearchBar";
+import MainSection from "../../ui/MainSection";
+import CardsContainer from "../../ui/CardsContainer";
+import NotificationIcon from "../../ui/NotificationIcon";
 
-import Boy from "../assets/images/boy.png";
+import Boy from "../../assets/images/boy.png";
 
 function Home() {
     return (
