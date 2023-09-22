@@ -56,12 +56,24 @@ class QuestionInputSerializer(serializers.Serializer):
     question_type = serializers.ChoiceField(choices=Question.QUESTION_TYPES)
     time_limit = serializers.DurationField()
 
+    def create(self, validated_data):
+        options_data = validated_data.pop('options', [])
+        question = Question.objects.create(**validated_data)
+
+        for option_data in options_data:
+            QuestionOption.objects.create(question=question, **option_data)
+
+        return question
+
 
 class QuestionOptionInputSerializer(serializers.Serializer):
     question = serializers.PrimaryKeyRelatedField(
         queryset=Question.objects.all())
     text = serializers.CharField(max_length=255)
     is_correct = serializers.BooleanField(default=False)
+
+    def create(self, validated_data):
+        return QuestionOption.objects.create(**validated_data)
 
 
 class SubmissionInputSerializer(serializers.Serializer):

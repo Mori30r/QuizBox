@@ -5,7 +5,10 @@ from rest_framework.permissions import IsAuthenticated
 from drf_spectacular.utils import extend_schema
 from .serializers import (
     QuizInputSerializer,
-    QuizSerializer
+    QuizSerializer,
+    QuestionInputSerializer,
+    QuestionSerializer,
+    QuestionOptionInputSerializer
 )
 
 
@@ -21,3 +24,29 @@ def create_quiz(request):
         quiz_serializer.save()
         return Response(quiz_serializer.data, status=status.HTTP_201_CREATED)
     return Response(quiz_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@extend_schema(
+    request=QuestionInputSerializer,
+    responses=QuestionSerializer
+)
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_question(request):
+    question_serializer = QuestionInputSerializer(data=request.data)
+    if question_serializer.is_valid():
+        question = question_serializer.save()
+
+        # Adding options to the question
+        options_data = request.data.get('options', [])
+        options_data = [dict(option, question=question.id)
+                        for option in options_data]
+        options_serializer = QuestionOptionInputSerializer(
+            data=options_data, many=True)
+        if options_serializer.is_valid():
+            options_serializer.save()
+
+        question_serializer = QuestionSerializer(question)
+        return Response(question_serializer.data, status=status.HTTP_201_CREATED)
+
+    return Response(question_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
