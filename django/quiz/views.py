@@ -8,7 +8,9 @@ from .serializers import (
     QuizSerializer,
     QuestionInputSerializer,
     QuestionSerializer,
-    QuestionOptionInputSerializer
+    QuestionOptionInputSerializer,
+    SubmissionInputSerializer,
+    SubmissionResponseSerializer
 )
 
 
@@ -50,3 +52,20 @@ def create_question(request):
         return Response(question_serializer.data, status=status.HTTP_201_CREATED)
 
     return Response(question_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@extend_schema(
+    request=SubmissionInputSerializer,
+    responses=SubmissionResponseSerializer
+)
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def submit_quiz(request):
+    serializer = SubmissionInputSerializer(data=request.data)
+    if serializer.is_valid():
+        submission = serializer.save()
+
+        data = SubmissionResponseSerializer(submission).data
+        return Response(data, status=status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

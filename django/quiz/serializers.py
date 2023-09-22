@@ -83,6 +83,9 @@ class SubmissionInputSerializer(serializers.Serializer):
     answers = serializers.JSONField()
     file_upload = serializers.FileField(allow_empty_file=True, required=False)
 
+    def create(self, validated_data):
+        return Submission.objects.create(**validated_data)
+
 
 class SubmissionResponseSerializer(serializers.ModelSerializer):
     student = serializers.StringRelatedField()
