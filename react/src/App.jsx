@@ -1,28 +1,34 @@
-import { RouterProvider } from "react-router-dom";
-import { router } from "./Router/AppRouter";
 import { Provider } from "react-redux";
-import store from "./store/store";
 import { styled } from "styled-components";
-import {
-    COURSE_PAGE,
-    HOME_PAGE,
-    LOGIN_PAGE,
-    PROFILE_EDIT_PAGE,
-    SIGNUP_PAGE,
-} from "./constants/pagesAddress";
+import { router } from "./Router/AppRouter";
+import { RouterProvider } from "react-router-dom";
+import store from "./store/store";
 import SubHeading from "./ui/SubHeading";
+import {
+    HOME_PAGE,
+    QUIZ_PAGE,
+    LOGIN_PAGE,
+    SIGNUP_PAGE,
+    COURSE_PAGE,
+    PROFILE_EDIT_PAGE,
+} from "./constants/pagesAddress";
 
 const DevelopementRouting = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-    display: grid;
-    row-gap: 1rem;
+    display: flex;
+    column-gap: 3rem;
     justify-items: center;
-    margin: 1rem;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: var(--color-purple-400);
     z-index: 2;
+    opacity: 0.2;
+    transition: 0.4s all;
+
+    &:hover {
+        opacity: 1;
+    }
 
     & a {
         font-size: 1.5rem;
@@ -34,12 +40,13 @@ const DevelopementRouting = styled.div`
 function App() {
     return (
         <Provider store={store}>
-            <RouterProvider router={router} />;
+            <RouterProvider router={router} />
             <DevelopementRouting>
                 <SubHeading type="white">FOR DEVELOPEMENT</SubHeading>
                 <a href={HOME_PAGE}>صفحه اصلی</a>
                 <a href={COURSE_PAGE}>صفحه جزئیات درس</a>
                 <a href={PROFILE_EDIT_PAGE}>صفحه ویرایش پروفایل</a>
+                <a href={QUIZ_PAGE}>صفحه کوئیز</a>
                 <a href={SIGNUP_PAGE}>صفحه ثبت نام</a>
                 <a href={LOGIN_PAGE}>صفحه ورود</a>
             </DevelopementRouting>

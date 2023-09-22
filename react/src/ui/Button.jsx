@@ -14,7 +14,7 @@ const types = {
         }
     `,
     outline: css`
-        background-color: var(--color-purple-0);
+        background-color: inherit;
         color: var(--color-purple-200);
 
         &:hover {

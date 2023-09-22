@@ -117,25 +117,25 @@ const OnlineQuizText = styled.p`
     }
 `;
 
-function QuizBox({ quiz }) {
+function QuizBox({ quiz = {} }) {
+    const { active, name, teacher, start, end } = quiz;
     return (
         <StyledQuizBox>
-            <Quiz $active={quiz.active}>
+            <Quiz $active={active}>
                 <QuizDetails>
-                    <QuizName $active={quiz.active}>{quiz.name}</QuizName>
-                    <QuizTeacher $active={quiz.active}>
-                        {quiz.teacher}
-                    </QuizTeacher>
+                    <QuizName $active={active}>{name}</QuizName>
+                    <QuizTeacher $active={active}>{teacher}</QuizTeacher>
                 </QuizDetails>
-                <CircleInQuiz $active={quiz.active} />
+                <CircleInQuiz $active={active} />
             </Quiz>
-            {!quiz.active ? (
+            {/* "teacher" condition make this component reUsable in quiz page */}
+            {!active && teacher ? (
                 <QuizTime>
-                    <p>{quiz.start}</p>
-                    <p>{quiz.end}</p>
+                    <p>{start}</p>
+                    <p>{end}</p>
                 </QuizTime>
             ) : (
-                <OnlineQuizText>در حال برگزاری</OnlineQuizText>
+                teacher && <OnlineQuizText>در حال برگزاری</OnlineQuizText>
             )}
         </StyledQuizBox>
     );

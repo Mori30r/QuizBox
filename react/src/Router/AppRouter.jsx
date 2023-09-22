@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import Quiz from "../pages/quiz/Quiz";
 import Home from "../pages/home/Home";
 import Auth from "../pages/auth/Auth";
 import Login from "../pages/auth/Login";
@@ -13,6 +14,7 @@ import {
     HOME_PAGE,
     LOGIN_PAGE,
     PROFILE_EDIT_PAGE,
+    QUIZ_PAGE,
     SIGNUP_PAGE,
 } from "./../constants/pagesAddress";
 
@@ -51,5 +53,9 @@ export const router = createBrowserRouter([
                 element: <Signup />,
             },
         ],
+    },
+    {
+        element: <Quiz />,
+        path: QUIZ_PAGE,
     },
 ]);
