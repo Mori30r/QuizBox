@@ -13,6 +13,7 @@ import Check from "../../ui/Check";
 import BoyTyping from "../../assets/images/boy-typing.png";
 import { LOGIN_PAGE } from "../../constants/pagesAddress";
 import { signUpSchema } from "../../constants/dataPatterns";
+import Radio from "../../ui/Radio";
 
 const Image = styled.img`
     position: absolute;
@@ -26,6 +27,13 @@ const StyledNavLink = styled(NavLink)`
     color: inherit;
     font-weight: 1000;
     margin-right: 0.5rem;
+`;
+
+const RadioContainer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: flex-end;
+    margin-top: 2rem;
 `;
 
 function Signup() {
@@ -76,6 +84,29 @@ function Signup() {
                     >
                         رمز عبور
                     </Input>
+                    <RadioContainer>
+                        <Radio
+                            register={{
+                                ...register("role"),
+                            }}
+                            value="teacher"
+                            name="role"
+                            type="radio"
+                        >
+                            استاد
+                        </Radio>
+                        <Radio
+                            register={{
+                                ...register("role"),
+                            }}
+                            value="student"
+                            name="role"
+                            type="radio"
+                            checked
+                        >
+                            دانش آموز
+                        </Radio>
+                    </RadioContainer>
                     <Check register={{ ...register("remember") }} id="remember">
                         این حساب را به خاطر بسپر
                     </Check>

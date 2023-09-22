@@ -152,6 +152,36 @@ const GlobalStyles = styled.createGlobalStyle`
             transform: scale(1);
         }
     }
+
+    input[type="radio"] {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: var(--color-grey-0);
+        margin: 0;
+
+        width: 1.4rem;
+        height: 1.4rem;
+        border: 0.2rem solid var(--color-purple-100);
+        border-radius: 50%;
+        transform: translateY(-0.075rem);
+
+        display: grid;
+        place-content: center;
+
+        &::before {
+            content: "";
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 0.1s transform ease-in-out;
+            background-color: var(--color-purple-200);
+        }
+
+        &:checked::before {
+            transform: scale(1);
+        }
+    }
 `;
 
 export default GlobalStyles;

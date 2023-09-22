@@ -106,7 +106,6 @@ function Input({ id, children, fullWidth, register, type, shape, control }) {
     const [isHidden, setIsHidden] = useState(true);
     const hasValue = Boolean(useWatch({ control, name: id }));
     const { errors } = useFormState({ control });
-    console.log(errors);
     return (
         <InputContainer $fullWidth={fullWidth}>
             <Label $hasValue={hasValue} htmlFor={id} shape={shape} type={type}>
