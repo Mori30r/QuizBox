@@ -37,6 +37,8 @@ class QuizInputSerializer(serializers.ModelSerializer):
         queryset=Student.objects.all(),
         pk_field=serializers.IntegerField()
     )
+    start_date = serializers.DateTimeField(format='iso8601')
+    end_date = serializers.DateTimeField(format='iso8601')
 
     class Meta:
         model = Quiz
@@ -82,6 +84,7 @@ class SubmissionInputSerializer(serializers.Serializer):
         queryset=Student.objects.all())
     answers = serializers.JSONField()
     file_upload = serializers.FileField(allow_empty_file=True, required=False)
+    submitted_at = serializers.DateTimeField(format='iso8601')
 
     def create(self, validated_data):
         return Submission.objects.create(**validated_data)
