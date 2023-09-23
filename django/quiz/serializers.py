@@ -39,6 +39,7 @@ class QuizInputSerializer(serializers.ModelSerializer):
     )
     start_date = serializers.DateTimeField(format='iso8601')
     end_date = serializers.DateTimeField(format='iso8601')
+    duration = serializers.DurationField(format='iso8601')
 
     class Meta:
         model = Quiz
@@ -56,7 +57,7 @@ class QuestionInputSerializer(serializers.Serializer):
     quiz = serializers.PrimaryKeyRelatedField(queryset=Quiz.objects.all())
     description = serializers.CharField(max_length=255)
     question_type = serializers.ChoiceField(choices=Question.QUESTION_TYPES)
-    time_limit = serializers.DurationField()
+    time_limit = serializers.DurationField(format='iso8601')
 
     def create(self, validated_data):
         options_data = validated_data.pop('options', [])
