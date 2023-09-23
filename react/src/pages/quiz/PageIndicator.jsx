@@ -1,8 +1,10 @@
+import React from "react";
 import { styled } from "styled-components";
 
 const StyledPageIndicator = styled.div`
     display: flex;
     justify-self: center;
+    direction: rtl;
 `;
 
 const Circle = styled.div`
@@ -26,28 +28,20 @@ const Dash = styled.div`
     align-self: center;
 `;
 
-function PageIndicator() {
+function PageIndicator({ active, count }) {
     return (
         <StyledPageIndicator>
-            <Circle />
-            <Dash />
-            <Circle />
-            <Dash />
-            <Circle />
-            <Dash />
-            <Circle />
-            <Dash />
-            <Circle />
-            <Dash />
-            <Circle />
-            <Dash />
-            <Circle />
-            <Dash />
-            <Circle $active />
-            <Dash $wasActive />
-            <Circle $wasActive />
-            <Dash $wasActive />
-            <Circle $wasActive />
+            {Array.from({ length: count }, (_, i) => {
+                return (
+                    <React.Fragment key={i}>
+                        {i !== 0 && <Dash $wasActive={i <= active} />}
+                        <Circle
+                            $wasActive={i < active}
+                            $active={i === active}
+                        />
+                    </React.Fragment>
+                );
+            })}
         </StyledPageIndicator>
     );
 }

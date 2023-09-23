@@ -50,8 +50,12 @@ const StyledButton = styled.button`
     ${(props) => types[props.type]};
 `;
 
-function Button({ children, type }) {
-    return <StyledButton type={type}>{children}</StyledButton>;
+function Button({ children, type, onClick }) {
+    return (
+        <StyledButton onClick={onClick} type={type}>
+            {children}
+        </StyledButton>
+    );
 }
 
 export default Button;

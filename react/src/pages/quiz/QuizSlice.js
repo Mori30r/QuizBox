@@ -4,6 +4,7 @@ import { differenceInSeconds } from "date-fns";
 const initialState = {
     status: "ready", // ready, active, finished
     remainingTime: 0,
+    index: 0,
 };
 
 const QuizSlice = createSlice({
@@ -23,13 +24,17 @@ const QuizSlice = createSlice({
         insertNewAnswer(action) {
             // insert Answer into server
         },
+        nextQuestion(state) {
+            if (state.status === "finish") return;
+            state.index += 1;
+        },
         finishQuiz(state) {
             state.status = "finish";
         },
     },
 });
 
-export const { startQuiz, tick, insertNewAnswer, finishQuiz } =
+export const { startQuiz, tick, insertNewAnswer, nextQuestion, finishQuiz } =
     QuizSlice.actions;
 
 export default QuizSlice.reducer;

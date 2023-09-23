@@ -5,7 +5,10 @@ import Button from "../../ui/Button";
 import SubHeading from "../../ui/SubHeading";
 import { quiz } from "../../data/QuizQuestions";
 import { styled } from "styled-components";
-import { intervalToDuration } from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
+import { finishQuiz, nextQuestion } from "./QuizSlice";
+import { useNavigate } from "react-router-dom";
+import { COURSE_PAGE } from "./../../constants/pagesAddress";
 
 const AnswerBottom = styled.div`
     display: grid;
@@ -17,29 +20,41 @@ const AnswerBottom = styled.div`
     }
 `;
 
-console.log(
-    intervalToDuration({
-        start: new Date(quiz.start),
-        end: new Date(quiz.end),
-    })
-);
-
-console.log(new Date(quiz.start));
-
 function Answers() {
+    const { index } = useSelector((store) => store.quiz);
+    const question = quiz.questions.at(index);
+    const questionsLength = quiz.questions.length;
+    const dispatch = useDispatch();
+    const isLastQuestion = index === questionsLength - 1;
+    const navigate = useNavigate();
+
+    function handleClick() {
+        if (isLastQuestion) {
+            dispatch(finishQuiz());
+            navigate(COURSE_PAGE);
+        }
+        dispatch(nextQuestion());
+    }
+
     return (
         <>
             <Heading type="white">یکی از گزینه های زیر رو انتخاب کن</Heading>
             <div>
-                <CalenderBox quiz={{ active: false, name: "گزینه اول" }} />
-                <CalenderBox quiz={{ active: false, name: "گزینه دوم" }} />
-                <CalenderBox quiz={{ active: false, name: "گزینه سوم" }} />
-                <CalenderBox quiz={{ active: false, name: "گزینه چهارم" }} />
+                {question.options.map((option, i) => (
+                    <CalenderBox
+                        key={i}
+                        quiz={{ active: false, name: option.name }}
+                    />
+                ))}
             </div>
             <AnswerBottom>
-                <Button type="outline">سوال بعدی</Button>
-                <PageIndicator />
-                <SubHeading>سوال 3 از 10</SubHeading>
+                <Button onClick={handleClick} type="outline">
+                    سوال بعدی
+                </Button>
+                <PageIndicator active={index} count={questionsLength} />
+                <SubHeading>
+                    سوال {index + 1} از {questionsLength}
+                </SubHeading>
             </AnswerBottom>
         </>
     );
