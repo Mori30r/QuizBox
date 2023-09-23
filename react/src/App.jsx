@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 import { styled } from "styled-components";
 import { router } from "./Router/AppRouter";
 import { RouterProvider } from "react-router-dom";
-import store from "./store/store";
+import globalStore from "./store/globalStore";
 import SubHeading from "./ui/SubHeading";
 import {
     HOME_PAGE,
@@ -39,7 +39,7 @@ const DevelopementRouting = styled.div`
 
 function App() {
     return (
-        <Provider store={store}>
+        <Provider store={globalStore}>
             <RouterProvider router={router} />
             <DevelopementRouting>
                 <SubHeading type="white">FOR DEVELOPEMENT</SubHeading>
