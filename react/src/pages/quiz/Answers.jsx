@@ -49,7 +49,7 @@ function Answers() {
             </div>
             <AnswerBottom>
                 <Button onClick={handleClick} type="outline">
-                    سوال بعدی
+                    {isLastQuestion ? "پایان کوئیز" : "سوال بعدی"}
                 </Button>
                 <PageIndicator active={index} count={questionsLength} />
                 <SubHeading>

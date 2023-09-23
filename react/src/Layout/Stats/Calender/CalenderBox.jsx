@@ -6,10 +6,11 @@ const Quiz = styled.div`
     display: grid;
     grid-template-columns: 4fr 1fr;
     align-items: center;
-    align-self: flex-start;
+    align-self: center;
     width: 43rem;
     height: 9rem;
     border-radius: 25px;
+    transition: all 0.5s;
     background-color: ${(props) =>
         props.$active ? `var(--color-green-200)` : `var(--color-purple-200)`};
     box-shadow: 0 0 1rem
@@ -17,6 +18,10 @@ const Quiz = styled.div`
             props.$active
                 ? `var(--color-green-200)`
                 : `var(--color-purple-200)`};
+
+    &:hover {
+        transform: translateX(-1rem);
+    }
     @media screen and (${breakPoint9}) {
     }
 `;

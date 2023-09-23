@@ -16,6 +16,7 @@ const Circle = styled.div`
     width: ${(props) => (props.$active ? "1.5rem" : "1rem")};
     align-self: center;
     border-radius: 100%;
+    transition: all 0.2s;
 `;
 
 const Dash = styled.div`
@@ -26,6 +27,7 @@ const Dash = styled.div`
     width: 1rem;
     height: 0.2rem;
     align-self: center;
+    transition: all 0.2s;
 `;
 
 function PageIndicator({ active, count }) {
