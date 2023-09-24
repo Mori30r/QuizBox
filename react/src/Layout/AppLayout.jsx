@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { ThemeProvider, styled } from "styled-components";
-import { useSelector } from "react-redux";
+import { styled } from "styled-components";
 
 import Stats from "./Stats/Stats";
 import SideBar from "./SideBar/SideBar";
@@ -13,19 +12,12 @@ const StyledAppLayout = styled(Row)`
 `;
 
 function AppLayout() {
-    const { isOpen } = useSelector((store) => store.sideBar);
     return (
-        <ThemeProvider
-            theme={{
-                isOpen,
-            }}
-        >
-            <StyledAppLayout>
-                <Stats />
-                <Outlet />
-                <SideBar />
-            </StyledAppLayout>
-        </ThemeProvider>
+        <StyledAppLayout>
+            <Stats />
+            <Outlet />
+            <SideBar />
+        </StyledAppLayout>
     );
 }
 

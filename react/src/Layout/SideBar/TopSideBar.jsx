@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ProfileImage from "../../ui/ProfileImage";
 import RouteNavLink from "../../ui/RouteNavLink";
-import { toggleSideBar } from "./SideBarSlice";
+import { toggleSideBar } from "../../ui/uiSlice";
 
 import Profile from "../../assets/images/profile.png";
 import { PROFILE_EDIT_PAGE } from "../../constants/pagesAddress";
@@ -18,7 +18,7 @@ const StyledTopSideBar = styled.div`
     margin-bottom: 3rem;
 
     & img {
-        height: ${(props) => (props.theme.isOpen ? "12rem" : "7rem")};
+        height: ${(props) => (props.theme.isSideBarOpen ? "12rem" : "7rem")};
     }
 `;
 
@@ -27,7 +27,7 @@ const MenuIconContainer = styled.div`
     cursor: pointer;
 
     ${(props) =>
-        props.theme.isOpen &&
+        props.theme.isSideBarOpen &&
         css`
             align-self: flex-end;
             margin-right: 2rem;
@@ -47,13 +47,13 @@ const Status = styled.p`
 `;
 
 function TopSideBar() {
-    const { isOpen } = useSelector((store) => store.sideBar);
+    const { isSideBarOpen } = useSelector((store) => store.ui);
     const dispatch = useDispatch();
 
     return (
         <StyledTopSideBar type="vertical">
             <MenuIconContainer>
-                {isOpen ? (
+                {isSideBarOpen ? (
                     <HiXMark
                         onClick={() => dispatch(toggleSideBar())}
                         size={30}
@@ -70,7 +70,7 @@ function TopSideBar() {
             <RouteNavLink to={PROFILE_EDIT_PAGE}>
                 <ProfileImage src={Profile} />
             </RouteNavLink>
-            {isOpen && (
+            {isSideBarOpen && (
                 <>
                     <Name>جواد جوادی</Name>
                     <Status>دانشجو</Status>

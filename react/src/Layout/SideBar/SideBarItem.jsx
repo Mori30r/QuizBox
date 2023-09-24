@@ -4,7 +4,8 @@ const StyledSideBarItem = styled.div`
     position: relative;
     display: grid;
     column-gap: 6rem;
-    align-items: ${(props) => (props.theme.isOpen ? "center" : "flex-start")};
+    align-items: ${(props) =>
+        props.theme.isSideBarOpen ? "center" : "flex-start"};
     justify-content: center;
     color: var(--color-purple-300);
     font-weight: 600;
@@ -13,7 +14,7 @@ const StyledSideBarItem = styled.div`
     transition: all 0.5s;
 
     ${(props) =>
-        props.theme.isOpen &&
+        props.theme.isSideBarOpen &&
         css`
             grid-template-columns: 3fr 1fr;
         `}
@@ -30,7 +31,7 @@ const StyledSideBarItem = styled.div`
 
     ${(props) =>
         props.$isActive &&
-        props.theme.isOpen &&
+        props.theme.isSideBarOpen &&
         css`
             &::before {
                 content: "";
@@ -45,11 +46,11 @@ const StyledSideBarItem = styled.div`
 
 const SideBarName = styled.p`
     transition: all 0.5s ease;
-    font-size: ${(props) => (props.theme.isOpen ? "1.7rem" : "0")};
+    font-size: ${(props) => (props.theme.isSideBarOpen ? "1.7rem" : "0")};
     font-weight: 800;
-    opacity: ${(props) => (props.theme.isOpen ? "1" : "0")};
+    opacity: ${(props) => (props.theme.isSideBarOpen ? "1" : "0")};
     transform: ${(props) =>
-        props.theme.isOpen ? "translateX(0)" : "translateX(100px)"};
+        props.theme.isSideBarOpen ? "translateX(0)" : "translateX(100px)"};
     justify-self: flex-end;
 `;
 

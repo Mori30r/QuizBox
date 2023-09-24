@@ -1,4 +1,3 @@
-import { Provider } from "react-redux";
 import { createBrowserRouter } from "react-router-dom";
 
 import Quiz from "../pages/quiz/Quiz";
@@ -10,7 +9,6 @@ import AppLayout from "../Layout/AppLayout";
 import Course from "../pages/course/Course";
 import ProfileEdit from "../pages/profileEdit/ProfileEdit";
 
-import quizStore from "../store/quizStore";
 import {
     COURSE_PAGE,
     HOME_PAGE,
@@ -57,11 +55,7 @@ export const router = createBrowserRouter([
         ],
     },
     {
-        element: (
-            <Provider store={quizStore}>
-                <Quiz />
-            </Provider>
-        ),
+        element: <Quiz />,
         path: QUIZ_PAGE,
     },
 ]);

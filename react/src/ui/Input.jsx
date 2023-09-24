@@ -114,7 +114,7 @@ function Input({ id, children, fullWidth, register, type, shape, control }) {
             <Container>
                 <StyledInput
                     {...register}
-                    placeholder={shape === "underline" && children}
+                    placeholder={shape === "underline" ? children : ""}
                     shape={shape}
                     id={id}
                     type={type === "password" ? isHidden && "password" : type}

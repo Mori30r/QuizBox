@@ -9,19 +9,19 @@ import { breakPoint12 } from "../../constants/breakpoints";
 
 const StyledSideBar = styled(Row)`
     z-index: 2;
-    width: ${(props) => (props.theme.isOpen ? "25rem" : "10rem")};
+    width: ${(props) => (props.theme.isSideBarOpen ? "25rem" : "10rem")};
     background-color: var(--color-purple-0);
     transition: all 0.5s;
     border-radius: 25px;
 
     @media screen and (${breakPoint12}) {
-        width: ${(props) => (props.theme.isOpen ? "100%" : "10rem")};
-        height: ${(props) => (props.theme.isOpen ? "100%" : "7rem")};
+        width: ${(props) => (props.theme.isSideBarOpen ? "100%" : "10rem")};
+        height: ${(props) => (props.theme.isSideBarOpen ? "100%" : "7rem")};
         position: absolute;
         right: 0;
         top: 0;
         overflow: hidden;
-        background-color: ${(props) => !props.theme.isOpen && "inherit"};
+        background-color: ${(props) => !props.theme.isSideBarOpen && "inherit"};
     }
 `;
 

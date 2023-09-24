@@ -1,8 +1,7 @@
-import { Provider } from "react-redux";
-import { styled } from "styled-components";
+import { useSelector } from "react-redux";
+import { ThemeProvider, styled } from "styled-components";
 import { router } from "./Router/AppRouter";
 import { RouterProvider } from "react-router-dom";
-import globalStore from "./store/globalStore";
 import SubHeading from "./ui/SubHeading";
 import {
     HOME_PAGE,
@@ -38,8 +37,13 @@ const DevelopementRouting = styled.div`
 `;
 
 function App() {
+    const { isSideBarOpen } = useSelector((store) => store.ui);
     return (
-        <Provider store={globalStore}>
+        <ThemeProvider
+            theme={{
+                isSideBarOpen,
+            }}
+        >
             <RouterProvider router={router} />
             <DevelopementRouting>
                 <SubHeading type="white">FOR DEVELOPEMENT</SubHeading>
@@ -50,7 +54,7 @@ function App() {
                 <a href={SIGNUP_PAGE}>صفحه ثبت نام</a>
                 <a href={LOGIN_PAGE}>صفحه ورود</a>
             </DevelopementRouting>
-        </Provider>
+        </ThemeProvider>
     );
 }
 
