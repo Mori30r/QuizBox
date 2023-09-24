@@ -1,9 +1,10 @@
 import { styled } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 import Heading from "../../ui/Heading";
-import Timer from "./Timer";
+import Timer from "../../ui/Timer";
+import { finishQuiz } from "./QuizSlice";
 import { quiz } from "../../data/QuizQuestions";
-import { useSelector } from "react-redux";
 
 const StyledQuestion = styled.p`
     line-height: 3.5rem;
@@ -19,8 +20,14 @@ const StyledQuestion = styled.p`
 `;
 
 function Question() {
-    const { index } = useSelector((store) => store.quiz);
+    const { remainingTime, index } = useSelector((store) => store.quiz);
     const question = quiz.questions.at(index);
+    const dispatch = useDispatch();
+
+    function timerCallback() {
+        dispatch(finishQuiz());
+    }
+
     return (
         <>
             <Heading
@@ -35,7 +42,7 @@ function Question() {
                 <h1 color="var(--color-purple-0)">{index + 1} سوال</h1>
                 <StyledQuestion>{question.title}</StyledQuestion>
             </div>
-            <Timer />
+            <Timer duration={remainingTime} callback={timerCallback} />
         </>
     );
 }

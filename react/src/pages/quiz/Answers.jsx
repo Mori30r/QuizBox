@@ -21,12 +21,13 @@ const AnswerBottom = styled.div`
 `;
 
 function Answers() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { index } = useSelector((store) => store.quiz);
+
     const question = quiz.questions.at(index);
     const questionsLength = quiz.questions.length;
-    const dispatch = useDispatch();
     const isLastQuestion = index === questionsLength - 1;
-    const navigate = useNavigate();
 
     function handleClick() {
         if (isLastQuestion) {
