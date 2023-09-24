@@ -3,6 +3,7 @@ import Row from "../../../ui/Row";
 import { breakPoint6, breakPoint9 } from "../../../constants/breakpoints";
 
 const Quiz = styled.div`
+    cursor: pointer;
     display: grid;
     grid-template-columns: 4fr 1fr;
     align-items: center;
@@ -10,7 +11,8 @@ const Quiz = styled.div`
     width: 43rem;
     height: 9rem;
     border-radius: 25px;
-    transition: all 0.5s;
+    transition: all 0.2s;
+    transform: ${(props) => props.$active && "translateX(-1rem)"};
     background-color: ${(props) =>
         props.$active ? `var(--color-green-200)` : `var(--color-purple-200)`};
     box-shadow: 0 0 1rem
@@ -18,12 +20,6 @@ const Quiz = styled.div`
             props.$active
                 ? `var(--color-green-200)`
                 : `var(--color-purple-200)`};
-
-    &:hover {
-        transform: translateX(-1rem);
-    }
-    @media screen and (${breakPoint9}) {
-    }
 `;
 
 const CircleInQuiz = styled.div`
@@ -49,6 +45,7 @@ const CircleInQuiz = styled.div`
         width: 3.8rem;
         height: 3.8rem;
         position: absolute;
+        transition: all 0.2s;
         background-color: ${(props) =>
             props.$active
                 ? `var(--color-green-200)`
@@ -122,10 +119,10 @@ const OnlineQuizText = styled.p`
     }
 `;
 
-function QuizBox({ quiz = {} }) {
+function QuizBox({ quiz = {}, onClick }) {
     const { active, name, teacher, start, end } = quiz;
     return (
-        <StyledQuizBox>
+        <StyledQuizBox onClick={onClick}>
             <Quiz $active={active}>
                 <QuizDetails>
                     <QuizName $active={active}>{name}</QuizName>

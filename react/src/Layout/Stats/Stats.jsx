@@ -85,7 +85,7 @@ function Stats() {
                 <StatsBoxHeader>
                     <Button type="outline">مشاهده همه</Button>
                     <div>
-                        <Heading small>میانگین نمرات همه</Heading>
+                        <Heading $small>میانگین نمرات همه</Heading>
                     </div>
                 </StatsBoxHeader>
                 <ProgressList />

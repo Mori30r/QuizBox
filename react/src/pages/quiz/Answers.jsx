@@ -6,9 +6,10 @@ import SubHeading from "../../ui/SubHeading";
 import { quiz } from "../../data/QuizQuestions";
 import { styled } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { finishQuiz, nextQuestion } from "./QuizSlice";
+import { finishQuiz, insertNewAnswer, nextQuestion } from "./QuizSlice";
 import { useNavigate } from "react-router-dom";
 import { COURSE_PAGE } from "./../../constants/pagesAddress";
+import { useState } from "react";
 
 const AnswerBottom = styled.div`
     display: grid;
@@ -24,6 +25,7 @@ function Answers() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { index } = useSelector((store) => store.quiz);
+    const [chosenAnswer, setChosenAnswer] = useState(null);
 
     const question = quiz.questions.at(index);
     const questionsLength = quiz.questions.length;
@@ -34,7 +36,13 @@ function Answers() {
             dispatch(finishQuiz());
             navigate(COURSE_PAGE);
         }
+        dispatch(insertNewAnswer({ chosenAnswer }));
+        setChosenAnswer(null);
         dispatch(nextQuestion());
+    }
+
+    function chooseOption(i) {
+        setChosenAnswer(chosenAnswer === i ? null : i);
     }
 
     return (
@@ -44,7 +52,8 @@ function Answers() {
                 {question.options.map((option, i) => (
                     <CalenderBox
                         key={i}
-                        quiz={{ active: false, name: option.name }}
+                        onClick={() => chooseOption(i)}
+                        quiz={{ active: chosenAnswer === i, name: option.name }}
                     />
                 ))}
             </div>

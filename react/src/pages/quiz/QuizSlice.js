@@ -21,8 +21,9 @@ const QuizSlice = createSlice({
         tick(state) {
             state.remainingTime -= 1;
         },
-        insertNewAnswer(action) {
+        insertNewAnswer(state, action) {
             // insert Answer into server
+            console.log(`${state.index} => ${action.payload.chosenAnswer}`);
         },
         nextQuestion(state) {
             if (state.status === "finish") return;
