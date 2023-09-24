@@ -5,7 +5,6 @@ class Quiz(models.Model):
     name = models.CharField(max_length=50)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-    duration = models.DurationField()
     eligible_students = models.ManyToManyField(
         'account.Student', blank=True, related_name='quizzes')
     course = models.ForeignKey(
@@ -23,7 +22,6 @@ class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     description = models.CharField(max_length=255)
     question_type = models.CharField(max_length=12, choices=QUESTION_TYPES)
-    time_limit = models.DurationField()
 
 
 class QuestionOption(models.Model):
