@@ -68,7 +68,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware", 
-    
 ]
 
 ROOT_URLCONF = "quizbox.urls"
@@ -183,6 +182,8 @@ STATIC_URL = "static/"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "http://localhost:5173", # for React Side
+    "http://127.0.0.1:5173", # for React Side
 ]
 
 # Default primary key field type
