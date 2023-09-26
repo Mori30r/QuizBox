@@ -3,17 +3,20 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import Row from "../../ui/Row";
+import Input from "../../ui/Input";
+import Error from "../../ui/Error";
+import Check from "../../ui/Check";
+import Button from "../../ui/Button";
 import Heading from "../../ui/Heading";
 import SubHeading from "../../ui/SubHeading";
-import Input from "../../ui/Input";
-import Check from "../../ui/Check";
-import Row from "../../ui/Row";
-import Button from "../../ui/Button";
+import PropagateLoader from "react-spinners/PropagateLoader";
 import { Form, FormContainer, ImageContainer } from "./Auth.Elements";
 
+import { useLogin } from "./useLogin";
 import Girl from "../../assets/images/girl.png";
-import { SIGNUP_PAGE } from "../../constants/pagesAddress";
 import { loginSchema } from "../../constants/dataPatterns";
+import { SIGNUP_PAGE } from "../../constants/pagesAddress";
 
 const Image = styled.img`
     position: absolute;
@@ -29,20 +32,32 @@ const StyledNavLink = styled(NavLink)`
     margin-right: 0.5rem;
 `;
 
+const SpinnerContainer = styled.div`
+    align-self: center;
+    margin: 3rem 0 5rem 0;
+`;
+
 function Login() {
-    const { register, handleSubmit, control } = useForm({
+    const { register, handleSubmit, control, reset } = useForm({
         resolver: yupResolver(loginSchema),
     });
 
+    const { mutate: login, isLoading, isError } = useLogin();
+
     function handleLogin(e) {
         console.log(e);
+        // don't forget e.remember 😉
+        login({ username: e.username, password: e.password });
+        reset();
     }
+
     return (
         <>
             <FormContainer>
                 <Form onSubmit={handleSubmit(handleLogin)}>
                     <Heading>! خوش اومدی</Heading>
                     <SubHeading>اطلاعات ورود به حسابت رو وارد کن</SubHeading>
+                    {isError && <Error>! نام کاربری یا رمز عبور اشتباهه</Error>}
                     <Input
                         register={{
                             ...register("username"),
@@ -78,7 +93,14 @@ function Login() {
                             این حساب را به خاطر بسپر
                         </Check>
                     </Row>
-                    <Button type="primary">ورود به حساب</Button>
+                    {isLoading ? (
+                        <SpinnerContainer>
+                            <PropagateLoader color="var(--color-purple-300)" />
+                        </SpinnerContainer>
+                    ) : (
+                        <Button type="primary">ورود به حساب</Button>
+                    )}
+
                     <SubHeading>
                         هنوز حساب نساختی؟
                         <StyledNavLink to={SIGNUP_PAGE}>
