@@ -10,6 +10,29 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiTypes
 
 @extend_schema(
     request=StudentSerializer,
+    parameters=[
+        OpenApiParameter(
+            name='student_code',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Student Code',
+            required=True,
+        ),
+        OpenApiParameter(
+            name='major',
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.QUERY,
+            description='Major',
+            required=True,
+        ),
+        OpenApiParameter(
+            name='enrollment_date',
+            type=OpenApiTypes.DATE,
+            location=OpenApiParameter.QUERY,
+            description='Enrollment Date',
+            required=True,
+        ),
+    ],
     responses={
         status.HTTP_201_CREATED: None,
         status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
@@ -43,6 +66,15 @@ def create_account_student(request):
 
 @extend_schema(
     request=TeacherSerializer,
+    parameters=[
+        OpenApiParameter(
+            name='teacher_code',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Teacher Code',
+            required=True,
+        )
+    ],
     responses={
         status.HTTP_201_CREATED: None,
         status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
@@ -74,6 +106,15 @@ def create_account_teacher(request):
 
 @extend_schema(
     request=TeacherSerializer,
+    parameters=[
+        OpenApiParameter(
+            name='teacher_code',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Teacher Code',
+            required=True,
+        )
+    ],
     responses={
         status.HTTP_201_CREATED: None,
         status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
@@ -105,6 +146,29 @@ def update_account_teacher(request):
 
 @extend_schema(
     request=StudentSerializer,
+    parameters=[
+        OpenApiParameter(
+            name='student_code',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Student Code',
+            required=True,
+        ),
+        OpenApiParameter(
+            name='major',
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.QUERY,
+            description='Major',
+            required=True,
+        ),
+        OpenApiParameter(
+            name='enrollment_date',
+            type=OpenApiTypes.DATE,
+            location=OpenApiParameter.QUERY,
+            description='Enrollment Date',
+            required=True,
+        ),
+    ],
     responses={
         status.HTTP_201_CREATED: None,
         status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
@@ -185,11 +249,32 @@ def student_detail(request, student_id):
 
 @extend_schema(
     methods=['POST'],
-    request={
-        'student_id': OpenApiParameter(name='student_id', type=OpenApiTypes.INT, description='شناسه دانشجو'),
-        'teacher_id': OpenApiParameter(name='teacher_id', type=OpenApiTypes.INT, description='شناسه استاد'),
-        'course_id': OpenApiParameter(name='course_id', type=OpenApiTypes.INT, description='شناسه درس'),
-    },
+    parameters=[
+        OpenApiParameter(
+            name='student_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Student ID',
+            required=True,
+        ),
+
+        OpenApiParameter(
+            name='teacher_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Teacher ID',
+            required=True,
+        ),
+
+        OpenApiParameter(
+            name='course_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Course ID',
+            required=True,
+        ),
+    ],
+
     responses={
         status.HTTP_201_CREATED: None,
         status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
@@ -242,10 +327,22 @@ def enroll_student(request):
 
 
 @extend_schema(
-    request={
-        'teacher_id': OpenApiParameter(name='teacher_id', type=OpenApiTypes.INT),
-        'course_id': OpenApiParameter(name='course_id', type=OpenApiTypes.INT),
-    },
+    parameters=[
+        OpenApiParameter(
+            name='teacher_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Teacher ID',
+            required=True,
+        ),
+        OpenApiParameter(
+            name='course_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Course ID',
+            required=True,
+        ),
+    ],
     responses={
         status.HTTP_201_CREATED: None,
         status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
@@ -271,12 +368,38 @@ def list_student_requests(request):
 
 @extend_schema(
     methods=['POST'],
-    request={
-        'teacher_id': OpenApiParameter(name='teacher_id', type=OpenApiTypes.INT),
-        'course_id': OpenApiParameter(name='course_id', type=OpenApiTypes.INT),
-        'enrollment_id': OpenApiParameter(name='enrollment_id', type=OpenApiTypes.INT),
-        'action': OpenApiParameter('action', type=OpenApiTypes.STR)
-    },
+    parameters=[
+        OpenApiParameter(
+            name='teacher_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Teacher ID',
+            required=True,
+        ),
+        OpenApiParameter(
+            name='course_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Course ID',
+            required=True,
+        ),
+
+        OpenApiParameter(
+            name='enrollment_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Enrollment ID',
+            required=True,
+        ),
+
+        OpenApiParameter(
+            name='action',
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.QUERY,
+            description='Action -> approve or  reject',
+            required=True,
+        ),
+    ],
     responses={
         status.HTTP_201_CREATED: None,
         status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
@@ -328,57 +451,87 @@ def approve_student_request(request):
 
 
 @extend_schema(
-    tags=["Account API"]
+    tags=["Account API"],
+    parameters=[
+        OpenApiParameter(
+            name='teacher_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Teacher ID',
+            required=True,
+        ),
+    ]
 )
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def list_approved_students(request, teacher_id):
+def list_approved_students(request):
     '''
     لیست دانشجوهایی که توسط استاد تایید شده‌اند را برمی‌گرداند.
     '''
+    if request.method == 'POST':
+        teacher_id = request.data.get('teacher_id')
 
-    enrollments = Enrollment.objects.filter(
-        teacher_id=teacher_id, is_approved=True)
+        enrollments = Enrollment.objects.filter(
+            teacher_id=teacher_id, is_approved=True)
 
-    approved_students = []
-    for enrollment in enrollments:
-        status = 'Approved' if enrollment.is_approved else 'Rejected'
-        approved_students.append({
-            'course_id': enrollment.course.id,
-            'student_id': enrollment.student.id,
-            'teacher_id': enrollment.teacher.id,
-            'status': status,
-        })
+        approved_students = []
+        for enrollment in enrollments:
+            status = 'Approved' if enrollment.is_approved else 'Rejected'
+            approved_students.append({
+                'course_id': enrollment.course.id,
+                'student_id': enrollment.student.id,
+                'teacher_id': enrollment.teacher.id,
+                'status': status,
+            })
 
-    return Response({'approved_students': approved_students})
+        return Response({'approved_students': approved_students})
 
 
 @extend_schema(
-    tags=["Account API"]
+    tags=["Account API"],
+    parameters=[
+        OpenApiParameter(
+            name='student_id',
+            type=OpenApiTypes.INT,
+            location=OpenApiParameter.QUERY,
+            description='Student ID',
+            required=True,
+        ),
+    ]
 )
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def list_approved_teachers_by_student(request, student_id):
+def list_approved_teachers_by_student(request):
     '''
     لیست استادهایی که آن دانشجو را تایید کرده است را برمی‌گرداند.
     '''
+    if request.method == 'POST':
+        student_id = request.data.get('teacher_id')
+        enrollments = Enrollment.objects.filter(student_id=student_id)
 
-    enrollments = Enrollment.objects.filter(student_id=student_id)
+        approved_teachers = []
+        for enrollment in enrollments:
+            status = 'Approved' if enrollment.is_approved else 'Rejected'
+            approved_teachers.append({
+                'course_id': enrollment.course.id,
+                'student_id': enrollment.student.id,
+                'teacher_id': enrollment.teacher.id,
+                'status': status
+            })
 
-    approved_teachers = []
-    for enrollment in enrollments:
-        status = 'Approved' if enrollment.is_approved else 'Rejected'
-        approved_teachers.append({
-            'course_id': enrollment.course.id,
-            'student_id': enrollment.student.id,
-            'teacher_id': enrollment.teacher.id,
-            'status': status
-        })
-
-    return Response({'approved_teachers': approved_teachers})
+        return Response({'approved_teachers': approved_teachers})
 
 
 @extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name='course_name',
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.QUERY,
+            description='Name Course',
+            required=True,
+        ),
+    ],
     tags=["Account API"]
 )
 @api_view(['POST'])

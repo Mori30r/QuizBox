@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiTypes
 
 
 @extend_schema(
@@ -41,12 +42,32 @@ class SignUpView(APIView):
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@extend_schema(
-    tags=["authentication api"]
-)
 class LoginView(APIView):
     permission_classes = []
 
+    @extend_schema(
+        tags=["authentication api"],
+        parameters=[
+            OpenApiParameter(
+                name='email',
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.QUERY,
+                description='User email',
+                required=True,
+            ),
+            OpenApiParameter(
+                name='password',
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.QUERY,
+                description='User password',
+                required=True,
+            ),
+        ],
+        responses={
+            200: {'description': 'Login successful'},
+            400: {'description': 'Invalid email or password'},
+        }
+    )
     def post(self, request: Request):
         username = request.data.get("username")
         password = request.data.get("password")
@@ -54,22 +75,11 @@ class LoginView(APIView):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-
             tokens = create_jwt_pair_for_user(user)
-
-            response = {"message": "Login Successfull", "tokens": tokens}
+            response = {"message": "Login Successful", "tokens": tokens}
             return Response(data=response, status=status.HTTP_200_OK)
-
         else:
             return Response(data={"message": "Invalid email or password"})
-
-    def get(self, request: Request):
-        content = {
-            "user": str(request.user),
-            "auth": str(request.auth)
-        }
-
-        return Response(data=content, status=status.HTTP_200_OK)
 
 
 @extend_schema(
@@ -116,7 +126,9 @@ class SendPasswordResetEmailView(APIView):
         status.HTTP_201_CREATED: None,
         status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
     },
-    description='Create a eacher account.',
+    description="You will receive the uid at some point that you have requested to reset the password\
+          and uid It will be given/sent to you by email. You can also get it for development in the command line",
+
     tags=["authentication api"]
 )
 class UserPasswordResetView(APIView):

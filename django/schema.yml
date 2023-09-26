@@ -3,58 +3,37 @@ info:
   title: API Quiz Box
   version: 1.0.0
 paths:
-  /api/account/approve_student_request/{teacher_id}/courses/{course_id}/requests/:
-    get:
-      operationId: api_account_approve_student_request_courses_requests_retrieve
-      description: تایید درخواست های دانشجو ها از طرف استاد با این  انجام میشود
-      parameters:
-      - in: path
-        name: course_id
-        schema:
-          type: integer
-        required: true
-      - in: path
-        name: teacher_id
-        schema:
-          type: integer
-        required: true
-      tags:
-      - api
-      security:
-      - cookieAuth: []
-      - tokenAuth: []
-      - jwtAuth: []
-      responses:
-        '200':
-          description: No response body
+  /api/account/approve_student_request/:
     post:
-      operationId: api_account_approve_student_request_courses_requests_create
+      operationId: api_account_approve_student_request_create
       description: تایید درخواست های دانشجو ها از طرف استاد با این  انجام میشود
       parameters:
-      - in: path
+      - in: query
+        name: action
+        schema:
+          type: string
+        description: Action -> approve or  reject
+        required: true
+      - in: query
         name: course_id
         schema:
           type: integer
+        description: Course ID
         required: true
-      - in: path
+      - in: query
+        name: enrollment_id
+        schema:
+          type: integer
+        description: Enrollment ID
+        required: true
+      - in: query
         name: teacher_id
         schema:
           type: integer
+        description: Teacher ID
         required: true
       tags:
-      - api
-      requestBody:
-        content:
-          teacher_id:
-            schema:
-              type: object
-              additionalProperties: {}
-              description: Unspecified request body
-          course_id:
-            schema:
-              type: object
-              additionalProperties: {}
-              description: Unspecified request body
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -74,8 +53,28 @@ paths:
     post:
       operationId: api_account_create_account_student_create
       description: Create a student account.
+      parameters:
+      - in: query
+        name: enrollment_date
+        schema:
+          type: string
+          format: date
+        description: Enrollment Date
+        required: true
+      - in: query
+        name: major
+        schema:
+          type: string
+        description: Major
+        required: true
+      - in: query
+        name: student_code
+        schema:
+          type: integer
+        description: Student Code
+        required: true
       tags:
-      - api
+      - Account API
       requestBody:
         content:
           application/json:
@@ -107,8 +106,15 @@ paths:
     post:
       operationId: api_account_create_account_teacher_create
       description: Create a eacher account.
+      parameters:
+      - in: query
+        name: teacher_code
+        schema:
+          type: integer
+        description: Teacher Code
+        required: true
       tags:
-      - api
+      - Account API
       requestBody:
         content:
           application/json:
@@ -139,8 +145,15 @@ paths:
   /api/account/create_course/:
     post:
       operationId: api_account_create_course_create
+      parameters:
+      - in: query
+        name: course_name
+        schema:
+          type: string
+        description: Name Course
+        required: true
       tags:
-      - api
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -150,40 +163,30 @@ paths:
         '200':
           description: No response body
   /api/account/enroll-student/:
-    get:
-      operationId: api_account_enroll_student_retrieve
-      description: ارسال درخواست تایید ثبت نام دانشجو برای استاد و درس انتخاب شده
-      tags:
-      - api
-      security:
-      - cookieAuth: []
-      - tokenAuth: []
-      - jwtAuth: []
-      responses:
-        '200':
-          description: No response body
     post:
       operationId: api_account_enroll_student_create
       description: ارسال درخواست تایید ثبت نام دانشجو برای استاد و درس انتخاب شده
+      parameters:
+      - in: query
+        name: course_id
+        schema:
+          type: integer
+        description: Course ID
+        required: true
+      - in: query
+        name: student_id
+        schema:
+          type: integer
+        description: Student ID
+        required: true
+      - in: query
+        name: teacher_id
+        schema:
+          type: integer
+        description: Teacher ID
+        required: true
       tags:
-      - api
-      requestBody:
-        content:
-          student_id:
-            schema:
-              type: object
-              additionalProperties: {}
-              description: Unspecified request body
-          teacher_id:
-            schema:
-              type: object
-              additionalProperties: {}
-              description: Unspecified request body
-          course_id:
-            schema:
-              type: object
-              additionalProperties: {}
-              description: Unspecified request body
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -199,18 +202,19 @@ paths:
                 additionalProperties: {}
                 description: Unspecified response body
           description: ''
-  /api/account/list_approved_students/{teacher_id}/approved_students/:
+  /api/account/list_approved_students/:
     get:
-      operationId: api_account_list_approved_students_approved_students_retrieve
+      operationId: api_account_list_approved_students_retrieve
       description: لیست دانشجوهایی که توسط استاد تایید شده‌اند را برمی‌گرداند.
       parameters:
-      - in: path
+      - in: query
         name: teacher_id
         schema:
           type: integer
+        description: Teacher ID
         required: true
       tags:
-      - api
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -218,18 +222,19 @@ paths:
       responses:
         '200':
           description: No response body
-  /api/account/list_approved_teachers_by_student/{student_id}/approved_teachers/:
+  /api/account/list_approved_teachers_by_student/:
     get:
-      operationId: api_account_list_approved_teachers_by_student_approved_teachers_retrieve
+      operationId: api_account_list_approved_teachers_by_student_retrieve
       description: لیست استادهایی که آن دانشجو را تایید کرده است را برمی‌گرداند.
       parameters:
-      - in: path
+      - in: query
         name: student_id
         schema:
           type: integer
+        description: Student ID
         required: true
       tags:
-      - api
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -241,15 +246,36 @@ paths:
     get:
       operationId: api_account_list_student_requests_retrieve
       description: لیست درخواست های دانشجو هارو توی یک لیست به استاد نمایش میده
+      parameters:
+      - in: query
+        name: course_id
+        schema:
+          type: integer
+        description: Course ID
+        required: true
+      - in: query
+        name: teacher_id
+        schema:
+          type: integer
+        description: Teacher ID
+        required: true
       tags:
-      - api
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
       - jwtAuth: []
       responses:
-        '200':
+        '201':
           description: No response body
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
   /api/account/student/{student_id}/:
     get:
       operationId: api_account_student_retrieve
@@ -260,7 +286,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -273,7 +299,7 @@ paths:
     get:
       operationId: api_account_student_list_retrieve
       tags:
-      - api
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -291,7 +317,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -303,7 +329,7 @@ paths:
     get:
       operationId: api_account_teacher_list_retrieve
       tags:
-      - api
+      - Account API
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -315,8 +341,28 @@ paths:
     put:
       operationId: api_account_update_account_student_update
       description: Create a student account.
+      parameters:
+      - in: query
+        name: enrollment_date
+        schema:
+          type: string
+          format: date
+        description: Enrollment Date
+        required: true
+      - in: query
+        name: major
+        schema:
+          type: string
+        description: Major
+        required: true
+      - in: query
+        name: student_code
+        schema:
+          type: integer
+        description: Student Code
+        required: true
       tags:
-      - api
+      - Account API
       requestBody:
         content:
           application/json:
@@ -348,8 +394,15 @@ paths:
     put:
       operationId: api_account_update_account_teacher_update
       description: Create a teacher account.
+      parameters:
+      - in: query
+        name: teacher_code
+        schema:
+          type: integer
+        description: Teacher Code
+        required: true
       tags:
-      - api
+      - Account API
       requestBody:
         content:
           application/json:
@@ -382,7 +435,7 @@ paths:
       operationId: api_auth_changepassword_create
       description: Create a eacher account.
       tags:
-      - api
+      - authentication api
       requestBody:
         content:
           application/json:
@@ -411,32 +464,46 @@ paths:
                 description: Unspecified response body
           description: ''
   /api/auth/login/:
-    get:
-      operationId: api_auth_login_retrieve
-      tags:
-      - api
-      security:
-      - cookieAuth: []
-      - tokenAuth: []
-      - jwtAuth: []
-      responses:
-        '200':
-          description: No response body
     post:
       operationId: api_auth_login_create
+      parameters:
+      - in: query
+        name: email
+        schema:
+          type: string
+        description: User email
+        required: true
+      - in: query
+        name: password
+        schema:
+          type: string
+        description: User password
+        required: true
       tags:
-      - api
+      - authentication api
       security:
       - cookieAuth: []
       - tokenAuth: []
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                description: Login successful
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                description: Invalid email or password
+          description: ''
   /api/auth/reset-password/{uid}/{token}/:
     post:
       operationId: api_auth_reset_password_create
-      description: Create a eacher account.
+      description: You will receive the uid at some point that you have requested
+        to reset the password          and uid It will be given/sent to you by email.
+        You can also get it for development in the command line
       parameters:
       - in: path
         name: token
@@ -449,7 +516,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - authentication api
       requestBody:
         content:
           application/json:
@@ -482,7 +549,7 @@ paths:
       operationId: api_auth_send_reset_password_email_create
       description: Create a eacher account.
       tags:
-      - api
+      - authentication api
       requestBody:
         content:
           application/json:
@@ -515,7 +582,7 @@ paths:
       operationId: api_auth_signup_create
       description: Create a eacher account.
       tags:
-      - api
+      - authentication api
       requestBody:
         content:
           application/json:
@@ -547,7 +614,7 @@ paths:
     post:
       operationId: api_quiz_create_question_create
       tags:
-      - api
+      - quiz api
       requestBody:
         content:
           application/json:
@@ -575,7 +642,7 @@ paths:
     post:
       operationId: api_quiz_create_quiz_create
       tags:
-      - api
+      - quiz api
       requestBody:
         content:
           application/json:
@@ -603,7 +670,7 @@ paths:
     post:
       operationId: api_quiz_submit_quiz_create
       tags:
-      - api
+      - quiz api
       requestBody:
         content:
           application/json:
