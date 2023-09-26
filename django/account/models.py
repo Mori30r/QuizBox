@@ -6,17 +6,11 @@ from django.contrib.auth.models import Group, Permission
 class Teacher(models.Model):
     user = models.ForeignKey(
         UserBaseQuizBox, on_delete=models.CASCADE, related_name='teacher')
-    teaching_experience = models.IntegerField()
     teacher_code = models.CharField(max_length=10, unique=True)
-    qualification = models.CharField(max_length=60, verbose_name="مدرک تحصیلی")
-    specialization = models.CharField(
-        max_length=60, verbose_name="رشته تدریس استاد")
     teacher_groups = models.ManyToManyField(
         Group, blank=True, related_name='teachers')
     teacher_user_permissions = models.ManyToManyField(
         Permission, blank=True, related_name='teachers')
-    course = models.ForeignKey(
-        'Course', on_delete=models.CASCADE, related_name='courses', null=True)
     courses = models.ManyToManyField(
         'Course', blank=True, related_name='teachers')
 
@@ -31,11 +25,7 @@ class Teacher(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(
         UserBaseQuizBox, on_delete=models.CASCADE, related_name='student')
-    number_of_semesters = models.IntegerField(default=0)
-    parent_name = models.CharField(max_length=100)
-    grade = models.CharField(max_length=50)
     student_code = models.CharField(max_length=10, unique=True)
-    parent_phone_number = models.CharField(max_length=12)
     major = models.CharField(max_length=80, verbose_name="رشته تحصیلی")
     enrollment_date = models.DateField(
         verbose_name="تاریخ ورود دانشجو به دانشگاه")
@@ -57,6 +47,8 @@ class Course(models.Model):
     name = models.CharField(max_length=50)
     students = models.ManyToManyField(
         Student, blank=True, related_name='course_students')
+    quizzes = models.ManyToManyField(
+        'quiz.Quiz', blank=True, related_name='course_quizzes')
 
     def __str__(self):
         return str(self.id)

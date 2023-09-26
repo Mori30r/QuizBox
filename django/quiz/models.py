@@ -8,7 +8,7 @@ class Quiz(models.Model):
     eligible_students = models.ManyToManyField(
         'account.Student', blank=True, related_name='quizzes')
     course = models.ForeignKey(
-        'account.Course', on_delete=models.CASCADE, related_name='quizzes')
+        'account.Course', on_delete=models.CASCADE, related_name='course_quizzes')
 
     def __str__(self):
         return f"{self.name}  + id_quiz: {self.id}"

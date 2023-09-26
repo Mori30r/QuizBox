@@ -1,5 +1,5 @@
 from .serializers import (UserSerializer, UserChangePasswordSerializer,
-                            SendPasswordResetEmailSerializer, UserPasswordResetSerializer)
+                          SendPasswordResetEmailSerializer, UserPasswordResetSerializer)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,13 +12,15 @@ from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 
+
 @extend_schema(
-    request=UserSerializer,  
+    request=UserSerializer,
     responses={
-        status.HTTP_201_CREATED: None,  
-        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+        status.HTTP_201_CREATED: None,
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
     },
-    description='Create a eacher account.'
+    description='Create a eacher account.',
+    tags=["authentication api"]
 )
 class SignUpView(APIView):
     serializer_class = UserSerializer
@@ -32,13 +34,16 @@ class SignUpView(APIView):
             serializer.save()
             content = {
                 "message": "User Created Successfully",
-                "data": serializer.data,         
-                }
+                "data": serializer.data,
+            }
             return Response(data=content, status=status.HTTP_201_CREATED)
-        
+
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(
+    tags=["authentication api"]
+)
 class LoginView(APIView):
     permission_classes = []
 
@@ -60,58 +65,66 @@ class LoginView(APIView):
 
     def get(self, request: Request):
         content = {
-                "user": str(request.user),
-                "auth": str(request.auth)
+            "user": str(request.user),
+            "auth": str(request.auth)
         }
 
         return Response(data=content, status=status.HTTP_200_OK)
-    
-@extend_schema(
-    request=UserChangePasswordSerializer,  
-    responses={
-        status.HTTP_201_CREATED: None,  
-        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
-    },
-    description='Create a eacher account.'
-)
-class UserChangePasswordView(APIView):
-  permission_classes = [IsAuthenticated]
-  def post(self, request, format=None):
-    serializer = UserChangePasswordSerializer(data=request.data, context={'user':request.user})
-    serializer.is_valid(raise_exception=True)
-    return Response({'msg':'Password Changed Successfully'}, status=status.HTTP_200_OK)
+
 
 @extend_schema(
-    request=SendPasswordResetEmailSerializer,  
+    request=UserChangePasswordSerializer,
     responses={
-        status.HTTP_201_CREATED: None,  
-        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+        status.HTTP_201_CREATED: None,
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
     },
-    description='Create a eacher account.'
+    description='Create a eacher account.',
+    tags=["authentication api"]
+)
+class UserChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        serializer = UserChangePasswordSerializer(
+            data=request.data, context={'user': request.user})
+        serializer.is_valid(raise_exception=True)
+        return Response({'msg': 'Password Changed Successfully'}, status=status.HTTP_200_OK)
+
+
+@extend_schema(
+    request=SendPasswordResetEmailSerializer,
+    responses={
+        status.HTTP_201_CREATED: None,
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
+    },
+    description='Create a eacher account.',
+    tags=["authentication api"]
 )
 class SendPasswordResetEmailView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = []
-    
+
     def post(self, request, format=None):
         serializer = SendPasswordResetEmailSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response({'msg':'Password Reset link send. Please check your Email'}, status=status.HTTP_200_OK)
+        return Response({'msg': 'Password Reset link send. Please check your Email'}, status=status.HTTP_200_OK)
 
 
 @extend_schema(
-    request=UserPasswordResetSerializer,  
+    request=UserPasswordResetSerializer,
     responses={
-        status.HTTP_201_CREATED: None,  
-        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',    
+        status.HTTP_201_CREATED: None,
+        status.HTTP_422_UNPROCESSABLE_ENTITY: 'Error',
     },
-    description='Create a eacher account.'
+    description='Create a eacher account.',
+    tags=["authentication api"]
 )
 class UserPasswordResetView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = []
-    
+
     def post(self, request, uid, token, format=None):
-        serializer = UserPasswordResetSerializer(data=request.data, context={'uid':uid, 'token':token})
+        serializer = UserPasswordResetSerializer(
+            data=request.data, context={'uid': uid, 'token': token})
         serializer.is_valid(raise_exception=True)
-        return Response({'msg':'Password Reset Successfully'}, status=status.HTTP_200_OK)
+        return Response({'msg': 'Password Reset Successfully'}, status=status.HTTP_200_OK)

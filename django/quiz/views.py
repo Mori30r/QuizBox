@@ -16,7 +16,8 @@ from .serializers import (
 
 @extend_schema(
     request=QuizInputSerializer,
-    responses=QuizSerializer
+    responses=QuizSerializer,
+    tags=["quiz api"]
 )
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -30,7 +31,8 @@ def create_quiz(request):
 
 @extend_schema(
     request=QuestionInputSerializer,
-    responses=QuestionSerializer
+    responses=QuestionSerializer,
+    tags=["quiz api"]
 )
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -56,7 +58,8 @@ def create_question(request):
 
 @extend_schema(
     request=SubmissionInputSerializer,
-    responses=SubmissionResponseSerializer
+    responses=SubmissionResponseSerializer,
+    tags=["quiz api"]
 )
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

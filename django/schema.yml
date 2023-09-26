@@ -136,6 +136,19 @@ paths:
                 additionalProperties: {}
                 description: Unspecified response body
           description: ''
+  /api/account/create_course/:
+    post:
+      operationId: api_account_create_course_create
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
   /api/account/enroll-student/:
     get:
       operationId: api_account_enroll_student_retrieve
@@ -334,7 +347,7 @@ paths:
   /api/account/update_account_teacher/:
     put:
       operationId: api_account_update_account_teacher_update
-      description: Create a eacher account.
+      description: Create a teacher account.
       tags:
       - api
       requestBody:
@@ -530,8 +543,214 @@ paths:
                 additionalProperties: {}
                 description: Unspecified response body
           description: ''
+  /api/quiz/create_question/:
+    post:
+      operationId: api_quiz_create_question_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionInputRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/QuestionInputRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/QuestionInputRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+          description: ''
+  /api/quiz/create_quiz/:
+    post:
+      operationId: api_quiz_create_quiz_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuizInputRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/QuizInputRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/QuizInputRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quiz'
+          description: ''
+  /api/quiz/submit_quiz/:
+    post:
+      operationId: api_quiz_submit_quiz_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionInputRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SubmissionInputRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SubmissionInputRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionResponse'
+          description: ''
 components:
   schemas:
+    Question:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionOption'
+          readOnly: true
+        description:
+          type: string
+          maxLength: 255
+        question_type:
+          $ref: '#/components/schemas/QuestionTypeEnum'
+        quiz:
+          type: integer
+      required:
+      - description
+      - id
+      - options
+      - question_type
+      - quiz
+    QuestionInputRequest:
+      type: object
+      properties:
+        quiz:
+          type: integer
+        description:
+          type: string
+          minLength: 1
+          maxLength: 255
+        question_type:
+          $ref: '#/components/schemas/QuestionTypeEnum'
+      required:
+      - description
+      - question_type
+      - quiz
+    QuestionOption:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        text:
+          type: string
+          maxLength: 255
+        is_correct:
+          type: boolean
+        question:
+          type: integer
+      required:
+      - id
+      - question
+      - text
+    QuestionTypeEnum:
+      enum:
+      - explanatory
+      - test
+      type: string
+      description: |-
+        * `explanatory` - Explanatory
+        * `test` - Test
+    Quiz:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        course:
+          type: integer
+        eligible_students:
+          type: array
+          items:
+            type: integer
+      required:
+      - course
+      - end_date
+      - id
+      - name
+      - questions
+      - start_date
+    QuizInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 50
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        eligible_students:
+          type: array
+          items:
+            type: integer
+        course:
+          type: integer
+      required:
+      - course
+      - eligible_students
+      - end_date
+      - name
+      - start_date
     RoleEnum:
       enum:
       - Teacher
@@ -555,24 +774,10 @@ components:
       properties:
         user:
           $ref: '#/components/schemas/UserRequest'
-        number_of_semesters:
-          type: integer
-        parent_name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        grade:
-          type: string
-          minLength: 1
-          maxLength: 50
         student_code:
           type: string
           minLength: 1
           maxLength: 10
-        parent_phone_number:
-          type: string
-          minLength: 1
-          maxLength: 12
         major:
           type: string
           minLength: 1
@@ -589,41 +794,74 @@ components:
       required:
       - courses
       - enrollment_date
-      - grade
       - major
-      - parent_name
-      - parent_phone_number
       - student_code
       - user
+    SubmissionInputRequest:
+      type: object
+      properties:
+        quiz:
+          type: integer
+        student:
+          type: integer
+        answers:
+          type: object
+          additionalProperties: {}
+        file_upload:
+          type: string
+          format: binary
+        submitted_at:
+          type: string
+          format: date-time
+      required:
+      - answers
+      - quiz
+      - student
+      - submitted_at
+    SubmissionResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        student:
+          type: string
+          readOnly: true
+        quiz:
+          type: string
+          readOnly: true
+        submitted_at:
+          type: string
+          format: date-time
+          readOnly: true
+        answers:
+          type: object
+          additionalProperties: {}
+        file_upload:
+          type: string
+          format: uri
+          nullable: true
+      required:
+      - answers
+      - id
+      - quiz
+      - student
+      - submitted_at
     TeacherRequest:
       type: object
       properties:
         user:
           $ref: '#/components/schemas/UserRequest'
-        course:
-          type: integer
-          nullable: true
-        teaching_experience:
-          type: integer
+        courses:
+          type: array
+          items:
+            type: integer
         teacher_code:
           type: string
           minLength: 1
           maxLength: 10
-        qualification:
-          type: string
-          minLength: 1
-          title: مدرک تحصیلی
-          maxLength: 60
-        specialization:
-          type: string
-          minLength: 1
-          title: رشته تدریس استاد
-          maxLength: 60
       required:
-      - qualification
-      - specialization
       - teacher_code
-      - teaching_experience
       - user
     UserChangePasswordRequest:
       type: object
@@ -671,6 +909,10 @@ components:
         last_name:
           type: string
           maxLength: 150
+        password:
+          type: string
+          minLength: 1
+          maxLength: 128
         password2:
           type: string
           writeOnly: true
@@ -685,6 +927,7 @@ components:
           minLength: 1
           maxLength: 12
       required:
+      - password
       - role
   securitySchemes:
     cookieAuth:
