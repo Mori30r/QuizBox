@@ -47,7 +47,7 @@ function Login() {
     function handleLogin(e) {
         console.log(e);
         // don't forget e.remember 😉
-        login({ username: e.username, password: e.password });
+        login({ username: e.email, password: e.password });
         reset();
     }
 
@@ -60,14 +60,14 @@ function Login() {
                     {isError && <Error>! نام کاربری یا رمز عبور اشتباهه</Error>}
                     <Input
                         register={{
-                            ...register("username"),
+                            ...register("email"),
                         }}
-                        id="username"
+                        id="email"
                         shape="underline"
                         type="text"
                         control={control}
                     >
-                        نام کاربری
+                        ایمیل
                     </Input>
                     <Input
                         register={{

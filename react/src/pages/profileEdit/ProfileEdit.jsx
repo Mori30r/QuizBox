@@ -77,7 +77,7 @@ function ProfileEdit() {
                         type="text"
                         shape="normal"
                         control={control}
-                        register={{ ...register("lname") }}
+                        register={{ ...register("last_name") }}
                     >
                         نام خانوادگی
                     </Input>
@@ -85,7 +85,7 @@ function ProfileEdit() {
                         type="text"
                         shape="normal"
                         control={control}
-                        register={{ ...register("fname") }}
+                        register={{ ...register("first_name") }}
                     >
                         نام
                     </Input>
@@ -93,10 +93,10 @@ function ProfileEdit() {
                         type="text"
                         shape="normal"
                         control={control}
-                        register={{ ...register("username") }}
+                        register={{ ...register("email") }}
                         fullWidth
                     >
-                        نام کاربری
+                        آدرس ایمیل
                     </Input>
                     <Input
                         type="text"
@@ -113,15 +113,6 @@ function ProfileEdit() {
                         register={{ ...register("university") }}
                     >
                         دانشگاه
-                    </Input>
-                    <Input
-                        type="text"
-                        shape="normal"
-                        control={control}
-                        register={{ ...register("email") }}
-                        fullWidth
-                    >
-                        آدرس ایمیل
                     </Input>
                     <Input
                         type="text"

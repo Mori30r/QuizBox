@@ -7,7 +7,6 @@ const matchMessage = "رمز وارد شده با رمز عبور یکسان ن�
 
 const first_name = yup.string().required(requiredMessage).min(3, minMessage(3));
 const last_name = yup.string().required(requiredMessage).min(3, minMessage(3));
-const username = yup.string().required(requiredMessage).min(3, minMessage(3));
 const email = yup.string().email(emailMessage).required(requiredMessage);
 const password = yup.string().required(requiredMessage).min(5, minMessage(5));
 const password2 = yup
@@ -19,13 +18,12 @@ const password2 = yup
 export const signUpSchema = yup.object({
     first_name,
     last_name,
-    username,
     email,
     password,
     password2,
 });
 
 export const loginSchema = yup.object({
-    username,
+    email,
     password,
 });

@@ -84,17 +84,6 @@ function Signup() {
                         </Input>
                     </DoubleInputContainer>
                     <Input
-                        register={{
-                            ...register("username"),
-                        }}
-                        id="username"
-                        shape="underline"
-                        type="text"
-                        control={control}
-                    >
-                        نام کاربری
-                    </Input>
-                    <Input
                         register={{ ...register("email") }}
                         id="email"
                         shape="underline"
@@ -132,7 +121,7 @@ function Signup() {
                             register={{
                                 ...register("role"),
                             }}
-                            value="teacher"
+                            value="Teacher"
                             name="role"
                             type="radio"
                         >
@@ -142,7 +131,7 @@ function Signup() {
                             register={{
                                 ...register("role"),
                             }}
-                            value="student"
+                            value="Student"
                             name="role"
                             type="radio"
                             checked

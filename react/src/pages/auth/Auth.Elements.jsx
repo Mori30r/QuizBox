@@ -19,7 +19,7 @@ export const FormContainer = styled.div`
 export const Form = styled.form`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
 `;
 
 export const ImageContainer = styled.div`
