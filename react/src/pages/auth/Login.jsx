@@ -10,13 +10,13 @@ import Check from "../../ui/Check";
 import Button from "../../ui/Button";
 import Heading from "../../ui/Heading";
 import SubHeading from "../../ui/SubHeading";
-import PropagateLoader from "react-spinners/PropagateLoader";
 import { Form, FormContainer, ImageContainer } from "./Auth.Elements";
 
 import { useLogin } from "./useLogin";
 import Girl from "../../assets/images/girl.png";
 import { loginSchema } from "../../constants/dataPatterns";
 import { SIGNUP_PAGE } from "../../constants/pagesAddress";
+import Spinner from "./../../ui/Spinner";
 
 const Image = styled.img`
     position: absolute;
@@ -30,11 +30,6 @@ const StyledNavLink = styled(NavLink)`
     color: inherit;
     font-weight: 1000;
     margin-right: 0.5rem;
-`;
-
-const SpinnerContainer = styled.div`
-    align-self: center;
-    margin: 3rem 0 5rem 0;
 `;
 
 function Login() {
@@ -94,13 +89,10 @@ function Login() {
                         </Check>
                     </Row>
                     {isLoading ? (
-                        <SpinnerContainer>
-                            <PropagateLoader color="var(--color-purple-300)" />
-                        </SpinnerContainer>
+                        <Spinner />
                     ) : (
                         <Button type="primary">ورود به حساب</Button>
                     )}
-
                     <SubHeading>
                         هنوز حساب نساختی؟
                         <StyledNavLink to={SIGNUP_PAGE}>

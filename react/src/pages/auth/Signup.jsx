@@ -3,17 +3,20 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Form, FormContainer, ImageContainer } from "./Auth.Elements";
-import SubHeading from "../../ui/SubHeading";
-import Heading from "../../ui/Heading";
-import Button from "../../ui/Button";
+import Radio from "../../ui/Radio";
 import Input from "../../ui/Input";
 import Check from "../../ui/Check";
+import Error from "../../ui/Error";
+import Button from "../../ui/Button";
+import Spinner from "../../ui/Spinner";
+import Heading from "../../ui/Heading";
+import SubHeading from "../../ui/SubHeading";
+import { Form, FormContainer, ImageContainer } from "./Auth.Elements";
 
-import BoyTyping from "../../assets/images/boy-typing.png";
+import { useSignup } from "./useSignup";
 import { LOGIN_PAGE } from "../../constants/pagesAddress";
+import BoyTyping from "../../assets/images/boy-typing.png";
 import { signUpSchema } from "../../constants/dataPatterns";
-import Radio from "../../ui/Radio";
 
 const Image = styled.img`
     position: absolute;
@@ -45,12 +48,15 @@ const DoubleInputContainer = styled.div`
 `;
 
 function Signup() {
-    const { register, handleSubmit, control } = useForm({
+    const { register, handleSubmit, control, reset } = useForm({
         resolver: yupResolver(signUpSchema),
     });
 
-    function handleLogin(e) {
-        console.log(e);
+    const { mutate: signup, isLoading, isError } = useSignup();
+
+    function handleLogin(userInput) {
+        signup(userInput);
+        reset();
     }
 
     return (
@@ -61,6 +67,7 @@ function Signup() {
                     <SubHeading>
                         اطلاعاتت رو برای ساخت حساب جدید وارد کن
                     </SubHeading>
+                    {isError && <Error>! مشکلی در ثبت نام پیش اومده</Error>}
                     <DoubleInputContainer>
                         <Input
                             register={{
@@ -139,10 +146,12 @@ function Signup() {
                             دانش آموز
                         </Radio>
                     </RadioContainer>
-                    <Check register={{ ...register("remember") }} id="remember">
-                        این حساب را به خاطر بسپر
-                    </Check>
-                    <Button type="primary">ساخت اکانت</Button>
+                    <Check id="remember">این حساب را به خاطر بسپر</Check>
+                    {isLoading ? (
+                        <Spinner />
+                    ) : (
+                        <Button type="primary">ساخت اکانت</Button>
+                    )}
                     <SubHeading>
                         قبلا ثبت نام کردی؟
                         <StyledNavLink to={LOGIN_PAGE}>
