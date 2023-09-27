@@ -33,7 +33,15 @@ const RadioContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: flex-end;
+    column-gap: 5rem;
     margin-top: 2rem;
+`;
+
+const DoubleInputContainer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5rem;
+    direction: rtl; // to make in order with Tab
 `;
 
 function Signup() {
@@ -53,6 +61,28 @@ function Signup() {
                     <SubHeading>
                         اطلاعاتت رو برای ساخت حساب جدید وارد کن
                     </SubHeading>
+                    <DoubleInputContainer>
+                        <Input
+                            register={{
+                                ...register("first_name"),
+                            }}
+                            id="first_name"
+                            shape="underline"
+                            type="text"
+                            control={control}
+                        >
+                            نام
+                        </Input>
+                        <Input
+                            register={{ ...register("last_name") }}
+                            id="last_name"
+                            shape="underline"
+                            type="text"
+                            control={control}
+                        >
+                            نام خانوادگی
+                        </Input>
+                    </DoubleInputContainer>
                     <Input
                         register={{
                             ...register("username"),
@@ -73,17 +103,30 @@ function Signup() {
                     >
                         آدرس ایمیل
                     </Input>
-                    <Input
-                        register={{
-                            ...register("password"),
-                        }}
-                        id="password"
-                        shape="underline"
-                        type="password"
-                        control={control}
-                    >
-                        رمز عبور
-                    </Input>
+                    <DoubleInputContainer>
+                        <Input
+                            register={{
+                                ...register("password"),
+                            }}
+                            id="password"
+                            shape="underline"
+                            type="password"
+                            control={control}
+                        >
+                            رمز عبور
+                        </Input>
+                        <Input
+                            register={{
+                                ...register("password2"),
+                            }}
+                            id="password2"
+                            shape="underline"
+                            type="password"
+                            control={control}
+                        >
+                            تکرار رمز عبور
+                        </Input>
+                    </DoubleInputContainer>
                     <RadioContainer>
                         <Radio
                             register={{

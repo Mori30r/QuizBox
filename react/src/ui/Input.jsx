@@ -140,15 +140,7 @@ function Input({ id, children, fullWidth, register, type, shape, control }) {
                     )}
                 </Icon>
             </Container>
-            {errors?.[id]?.type === "required" && (
-                <Error>این فیلد رو حتما باید پر کنی !</Error>
-            )}
-            {errors?.[id]?.type === "email" && (
-                <Error>لطفا یه ایمیل معتبر وارد کن !</Error>
-            )}
-            {errors?.[id]?.type === "min" && (
-                <Error>تعداد حروف وارد شده خیلی کمه !</Error>
-            )}
+            {errors?.[id] && <Error>{errors[id].message}</Error>}
         </InputContainer>
     );
 }

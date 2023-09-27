@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { breakPoint8 } from "../../constants/breakpoints";
 
 export const FormContainer = styled.div`
-    height: 100dvh;
+    height: 95dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
