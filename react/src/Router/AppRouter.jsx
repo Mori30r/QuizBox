@@ -18,6 +18,8 @@ import {
     SIGNUP_PAGE,
 } from "./../constants/pagesAddress";
 
+// TODO: Add Courses, MakeQuiz, Grading, SendNotifications, Profile and ProjectDetail Page
+
 export const router = createBrowserRouter([
     {
         element: <AppLayout />,
