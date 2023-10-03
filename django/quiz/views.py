@@ -12,6 +12,7 @@ from .serializers import (
     SubmissionInputSerializer,
     SubmissionResponseSerializer
 )
+from .models import Question
 
 
 @extend_schema(
@@ -72,3 +73,21 @@ def submit_quiz(request):
         return Response(data, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@extend_schema(
+    responses=QuestionSerializer(many=True),
+    tags=["quiz api"]
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def view_student_answers(request):
+    # استاد و درس مورد نظر را از پارامترهای درخواست دریافت می‌کنیم
+    teacher_id = request.query_params.get('teacher_id')
+    course_id = request.query_params.get('course_id')
+
+    # دریافت لیست تمامی جواب‌های دانشجوهای مربوط به استاد و درس مورد نظر
+    questions = Question.objects.filter(
+        student__teacher_id=teacher_id, student__course_id=course_id)
+    question_serializer = QuestionSerializer(questions, many=True)
+    return Response(question_serializer.data, status=status.HTTP_200_OK)
